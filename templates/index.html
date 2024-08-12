@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock title %}
+
+{% block body %}
+<div class="container-fluid py-4">
+    <h1 class="text-center mb-4">Student Management</h1>
+    
+    <div class="row g-4">
+        <!-- Sidebar -->
+        <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="card shadow-md border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Actions</h5>
+                    <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-success">Add Student +</button>
+                        <button type="button" class="btn btn-warning">Edit Student</button>
+                        <button type="button" class="btn btn-danger">Delete Student -</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="col-lg-9 col-md-8 col-sm-12">
+            <!-- Statistics Section -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card shadow-md text-center border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Students</h5>
+                            <p class="card-text display-6">50</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow-md text-center border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">CBSE Students</h5>
+                            <p class="card-text display-6">30</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow-md text-center border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">WBBSE Students</h5>
+                            <p class="card-text display-6">20</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card shadow-md text-center border-0">
+                        <div class="card-body">
+                            <h5 class="card-title">ICSE Students</h5>
+                            <p class="card-text display-6">10</p> <!-- Update the number as needed -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Table Section -->
+            <div class="card shadow-md border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Student Data</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Sl no.</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">School</th>
+                                    <th scope="col">Board</th>
+                                    <th scope="col">Class</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Deep Naskar</td>
+                                    <td>Bodhicharia Senior Secondary School</td>
+                                    <td>CBSE</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Tanuja Farhin</td>
+                                    <td>Bodhicharia Senior Secondary School</td>
+                                    <td>CBSE</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Mrinmoy Naskar</td>
+                                    <td>Bodhicharia Senior Secondary School</td>
+                                    <td>CBSE</td>
+                                    <td>11 (Science)</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>Sandipan Bose</td>
+                                    <td>North Point Senior Secondary Boarding School (Rajarhat Branch)</td>
+                                    <td>CBSE</td>
+                                    <td>8</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>Puspita Saha</td>
+                                    <td>Ambika Soudamini Balika Vidyalaya</td>
+                                    <td>WBBSE</td>
+                                    <td>9</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>Sona Mondal</td>
+                                    <td>Bishnupur Sir Romesh Institution</td>
+                                    <td>WBBSE</td>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">7</th>
+                                    <td>Mayurika Bose</td>
+                                    <td>Bidhannagar Municipal School (BMS)</td>
+                                    <td>WBBSE</td>
+                                    <td>8</td>
+                                </tr>
+                                <!-- Add rows for ICSE students as needed -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

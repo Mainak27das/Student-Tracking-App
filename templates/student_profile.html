@@ -3,6 +3,34 @@
 {% load static %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<style>
+    .profile-card {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .profile-card-header {
+        background: linear-gradient(135deg, #42a5f5, #478ed1);
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+    .profile-card-body {
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+    .profile-card-body h5 {
+        margin-bottom: 20px;
+        font-size: 1.75rem;
+    }
+    .profile-card-body p {
+        margin: 10px 0;
+        font-size: 1.1rem;
+    }
+    .profile-card-body strong {
+        color: #333;
+    }
+</style>
 {% endblock style %}
 
 {% block body %}
@@ -11,12 +39,14 @@
     
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-12">
-            <div class="card shadow-md border-0">
-                <div class="card-body">
-                    <h5 class="card-title">{{ student.name }}</h5>
-                    <p class="card-text"><strong>School:</strong> {{ student.school }}</p>
-                    <p class="card-text"><strong>Board:</strong> {{ student.get_board_display }}</p>
-                    <p class="card-text"><strong>Class:</strong> {{ student.student_class }}</p>
+            <div class="card profile-card border-0">
+                <div class="card-header profile-card-header">
+                    <h1 class="card-title">{{ student.name }}</h1>
+                </div>
+                <div class="card-body profile-card-body">
+                    <p><strong>School:</strong> {{ student.school }}</p>
+                    <p><strong>Board:</strong> {{ student.get_board_display }}</p>
+                    <p><strong>Class:</strong> {{ student.student_class }}</p>
                 </div>
             </div>
         </div>

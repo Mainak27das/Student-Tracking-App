@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student
 from .forms import StudentForm
 from django.contrib import messages
@@ -48,3 +48,9 @@ def search(request):
     
     context = {"students": all_students, "search": search}
     return render(request, "search.html", context)
+
+
+def student_profile(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    context = {'student': student}
+    return render(request, 'student_profile.html', context)

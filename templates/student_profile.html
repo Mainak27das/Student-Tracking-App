@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Student Profile{% endblock title %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock style %}
+
+{% block body %}
+<div class="container-fluid py-4">
+    <h1 class="text-center mb-4">Student Profile</h1>
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-md border-0">
+                <div class="card-body">
+                    <h5 class="card-title">{{ student.name }}</h5>
+                    <p class="card-text"><strong>School:</strong> {{ student.school }}</p>
+                    <p class="card-text"><strong>Board:</strong> {{ student.get_board_display }}</p>
+                    <p class="card-text"><strong>Class:</strong> {{ student.student_class }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block script %}
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+{% endblock script %}
+{% endblock body %}

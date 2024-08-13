@@ -12,13 +12,15 @@
                 <div class="card-body">
                     <h5 class="card-title">Actions</h5>
                     <div class="d-grid gap-2">
-                        <button type="button" class="btn btn-success">Add Student +</button>
+                        <!-- Change the button to an anchor tag -->
+                        <a href="{% url 'add_student' %}" class="btn btn-success">Add Student +</a>
                         <button type="button" class="btn btn-warning">Edit Student</button>
                         <button type="button" class="btn btn-danger">Delete Student -</button>
                     </div>
                 </div>
             </div>
         </div>
+        
         
         <!-- Main Content -->
         <div class="col-lg-9 col-md-8 col-sm-12">
@@ -74,56 +76,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for student in students %}
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Deep Naskar</td>
-                                    <td>Bodhicharia Senior Secondary School</td>
-                                    <td>CBSE</td>
-                                    <td>10</td>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ student.name }}</td>
+                                    <td>{{ student.school }}</td>
+                                    <td>{{ student.board }}</td>
+                                    <td>{{ student.student_class }}</td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Tanuja Farhin</td>
-                                    <td>Bodhicharia Senior Secondary School</td>
-                                    <td>CBSE</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Mrinmoy Naskar</td>
-                                    <td>Bodhicharia Senior Secondary School</td>
-                                    <td>CBSE</td>
-                                    <td>11 (Science)</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>Sandipan Bose</td>
-                                    <td>North Point Senior Secondary Boarding School (Rajarhat Branch)</td>
-                                    <td>CBSE</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Puspita Saha</td>
-                                    <td>Ambika Soudamini Balika Vidyalaya</td>
-                                    <td>WBBSE</td>
-                                    <td>9</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">6</th>
-                                    <td>Sona Mondal</td>
-                                    <td>Bishnupur Sir Romesh Institution</td>
-                                    <td>WBBSE</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">7</th>
-                                    <td>Mayurika Bose</td>
-                                    <td>Bidhannagar Municipal School (BMS)</td>
-                                    <td>WBBSE</td>
-                                    <td>8</td>
-                                </tr>
-                                <!-- Add rows for ICSE students as needed -->
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

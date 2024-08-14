@@ -24,12 +24,11 @@ def add_student(request):
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, " Student Added !! ")
+            messages.success(request, "Student Added!!")
             return redirect('index')
     else:
         form = StudentForm()
     return render(request, 'add_student.html', {'form': form})
-
 
 def search(request):
     search = request.GET.get("search", "")
@@ -37,20 +36,27 @@ def search(request):
     if len(search) > 80:
         all_students = Student.objects.none()
     else:
-        # Filter based on available fields in the Student model
+        # Filter based on the updated fields in the Student model
         all_students_name = Student.objects.filter(name__icontains=search)
-        all_students_school = Student.objects.filter(school__icontains=search)
+        all_students_phone = Student.objects.filter(phone_number__icontains=search)
         all_students_board = Student.objects.filter(board__icontains=search)
         all_students_class = Student.objects.filter(student_class__icontains=search)
+        all_students_payment = Student.objects.filter(payment__icontains=search)
         
         # Combine all querysets
-        all_students = all_students_name.union(all_students_school, all_students_board, all_students_class)
+        all_students = all_students_name.union(
+            all_students_phone, 
+            all_students_board, 
+            all_students_class, 
+            all_students_payment
+        )
     
     context = {"students": all_students, "search": search}
     return render(request, "search.html", context)
 
-
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
-    context = {'student': student}
+    context = {
+        'student': student,
+    }
     return render(request, 'student_profile.html', context)

@@ -104,9 +104,10 @@
                         <tr>
                             <th scope="col">Sl no.</th>
                             <th scope="col">Name</th>
-                            <th scope="col">School</th>
                             <th scope="col">Board</th>
                             <th scope="col">Class</th>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -114,9 +115,10 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td><a href="{% url 'student_profile' student.id %}">{{ student.name }}</a></td>
-                            <td>{{ student.school }}</td>
                             <td>{{ student.board }}</td>
                             <td>{{ student.student_class }}</td>
+                            <td>{{ student.subject }}</td>
+                            <td>{{ student.payment }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -126,14 +128,8 @@
     </div>
 </div>
 
-
-    {% block script %}
-    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-    {% endblock script %}
-
-
-
-
-
+{% block script %}
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+{% endblock script %}
 
 {% endblock body %}

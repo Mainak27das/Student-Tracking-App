@@ -44,6 +44,8 @@
                     <h1 class="card-title">{{ student.name }}</h1>
                 </div>
                 <div class="card-body profile-card-body">
+                    <div class="p-1"><button type="button" class="btn btn-warning">Edit Student</button></div>
+                    <div class="p-1"><button type="button" class="btn btn-danger">Delete Student -</button></div>
                     <p><strong>Phone Number:</strong> {{ student.phone_number }}</p>
                     <p><strong>Board:</strong> {{ student.get_board_display }}</p>
                     <p><strong>Class:</strong> {{ student.student_class }}</p>

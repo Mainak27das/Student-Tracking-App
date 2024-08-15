@@ -86,8 +86,8 @@
                 <div class="card-body">
                     <div class="d-flex flex-row">
                         <div class="p-1"><a href="{% url 'add_student' %}" class="btn btn-success">Add Student +</a></div>
-                        <div class="p-1"><button type="button" class="btn btn-warning">Edit Student</button></div>
-                        <div class="p-1"><button type="button" class="btn btn-danger">Delete Student -</button></div>
+                        <div class="p-1"><a href="#" class="btn btn-primary">Create Batch </a></div>
+                        <div class="p-1"><a href="#" class="btn btn-secondary">View Batch</a></div>
                     </div>
                 </div>
             </div>
@@ -107,6 +107,7 @@
                             <th scope="col">Board</th>
                             <th scope="col">Class</th>
                             <th scope="col">Subject</th>
+                            <th scope="col">Phone no.</th>
                             <th scope="col">Payment</th>
                         </tr>
                     </thead>
@@ -118,6 +119,7 @@
                             <td>{{ student.board }}</td>
                             <td>{{ student.student_class }}</td>
                             <td>{{ student.subject }}</td>
+                            <td>{{ student.phone_number }}</td>
                             <td>{{ student.payment }}</td>
                         </tr>
                         {% endfor %}

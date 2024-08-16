@@ -25,7 +25,7 @@ class Batch(models.Model):
         ('Saturday', 'Saturday'),
         ('Sunday', 'Sunday')
     ])
-    batch_duration = models.DurationField(default=timedelta(hours=1))  # Default 1-hour duration
+    batch_duration = models.DurationField(default="")  # Default 1-hour duration
     class_level = models.CharField(max_length=50, default="N/A")
 
     class_mode = models.CharField(max_length=100, default='Offline')  # Default as 'N/A'

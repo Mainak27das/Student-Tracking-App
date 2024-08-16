@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Create Batch{% endblock title %}
+
+{% block body %}
+<div class="container py-4">
+    <h2>Create New Batch</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create Batch</button>
+    </form>
+</div>
+{% endblock body %}

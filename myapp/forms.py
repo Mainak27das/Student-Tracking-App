@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student
+from .models import Student,Batch
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -12,4 +12,21 @@ class StudentForm(forms.ModelForm):
             'student_class': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
             'payment': forms.Select(attrs={'class': 'form-control'}),  # 'payment' is a choice field
             'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject'}),
+        }
+
+class BatchForm(forms.ModelForm):
+    class Meta:
+        model = Batch
+        fields = ['subject_name', 'batch_time', 'batch_day']
+        widgets = {
+            'batch_time': forms.TimeInput(attrs={'type': 'time'}),
+            'batch_day': forms.Select(choices=[
+                ('Monday', 'Monday'),
+                ('Tuesday', 'Tuesday'),
+                ('Wednesday', 'Wednesday'),
+                ('Thursday', 'Thursday'),
+                ('Friday', 'Friday'),
+                ('Saturday', 'Saturday'),
+                ('Sunday', 'Sunday')
+            ])
         }

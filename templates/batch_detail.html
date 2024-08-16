@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% block title %}Batch Details{% endblock title %}
+
+{% block body %}
+<div class="container py-4">
+    <h2 class="text-center mb-4">Batch: {{ batch.subject_name }}</h2>
+    
+    <!-- Batch Details -->
+    <div class="card my-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">Batch Time: {{ batch.batch_time }}</h5>
+            <h5 class="card-title">Batch Day: {{ batch.batch_day }}</h5>
+        </div>
+    </div>
+
+    <!-- Add Existing Students -->
+    <div class="mb-4">
+        <h3 class="mb-3">Add Existing Students</h3>
+        <form method="post" action="{% url 'add_existing_students' batch.id %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="existingStudents" class="form-label">Select Students:</label>
+                <select id="existingStudents" name="existing_students" class="form-select" multiple size="6">
+                    {% for student in students %}
+                        <option value="{{ student.id }}" 
+                            {% if student in batch.students.all %} 
+                            disabled 
+                            {% endif %}
+                        >
+                            {{ student.name }}{% if student in batch.students.all %} (Already in batch){% endif %}
+                        </option>
+                    {% endfor %}
+                </select>
+                <div class="form-text mt-2">Hold down the Ctrl (Windows) or Command (Mac) key to select multiple options.</div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Add Selected Students</button>
+            <button type="button" id="unselectButton" class="btn btn-secondary mt-3">Unselect All</button>
+            {% if messages %}
+                <div class="alert alert-info mt-3">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <!-- Add New Student Button Triggering Modal -->
+    <div class="mb-4">
+        <h3 class="mb-3">Add New Student</h3>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+            Open Add New Student Form
+        </button>
+    </div>
+
+    <!-- List of Students in the Batch -->
+    <h3 class="mt-5">Students in This Batch</h3>
+    <ul class="list-group">
+        {% for student in batch.students.all %}
+            <li class="list-group-item">{{ student.name }}</li>
+        {% empty %}
+            <li class="list-group-item">No students in this batch.</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- Bootstrap Modal for Adding New Student -->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'add_new_student' batch.id %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="studentName" class="form-label">Student Name:</label>
+                        <input type="text" id="studentName" name="name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentPhone" class="form-label">Phone Number:</label>
+                        <input type="text" id="studentPhone" name="phone_number" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentBoard" class="form-label">Board:</label>
+                        <select id="studentBoard" name="board" class="form-select">
+                            <option value="CBSE">CBSE</option>
+                            <option value="WBBSE">WBBSE</option>
+                            <option value="ICSE">ICSE</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentClass" class="form-label">Class:</label>
+                        <input type="text" id="studentClass" name="student_class" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentPayment" class="form-label">Payment Status:</label>
+                        <select id="studentPayment" name="payment" class="form-select">
+                            <option value="DONE">DONE</option>
+                            <option value="NOT DONE">NOT DONE</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentSubject" class="form-label">Subject:</label>
+                        <input type="text" id="studentSubject" name="subject" class="form-control" value="{{ batch.subject_name }}" readonly>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script to Unselect All Options -->
+<script>
+    document.getElementById('unselectButton').addEventListener('click', function() {
+        const selectElement = document.getElementById('existingStudents');
+        for (let option of selectElement.options) {
+            option.selected = false;
+        }
+    });
+</script>
+
+{% endblock body %}

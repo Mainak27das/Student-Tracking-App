@@ -17,7 +17,10 @@ class StudentForm(forms.ModelForm):
 class BatchForm(forms.ModelForm):
     class Meta:
         model = Batch
-        fields = ['subject_name', 'batch_time', 'batch_day']
+        fields = [
+            'subject_name', 'batch_time', 'batch_day', 'batch_duration', 
+            'class_level', 'class_mode', 'start_date', 'teacher_name'
+        ]
         widgets = {
             'batch_time': forms.TimeInput(attrs={'type': 'time'}),
             'batch_day': forms.Select(choices=[
@@ -28,5 +31,11 @@ class BatchForm(forms.ModelForm):
                 ('Friday', 'Friday'),
                 ('Saturday', 'Saturday'),
                 ('Sunday', 'Sunday')
-            ])
+            ]),
+            'batch_duration': forms.TimeInput(attrs={'type': 'time'}),
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'batch_status': forms.Select(choices=[
+                ('Active', 'Active'),
+                ('Inactive', 'Inactive')
+            ]),
         }

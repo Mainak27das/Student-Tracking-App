@@ -16,16 +16,8 @@ class Student(models.Model):
 class Batch(models.Model):
     subject_name = models.CharField(max_length=100)
     batch_time = models.TimeField()
-    batch_day = models.CharField(max_length=20, choices=[
-        ('Monday', 'Monday'),
-        ('Tuesday', 'Tuesday'),
-        ('Wednesday', 'Wednesday'),
-        ('Thursday', 'Thursday'),
-        ('Friday', 'Friday'),
-        ('Saturday', 'Saturday'),
-        ('Sunday', 'Sunday')
-    ])
-    batch_duration = models.DurationField(default="")  # Default 1-hour duration
+    batch_day = models.CharField(max_length=50)
+    batch_duration = models.CharField(max_length=5,default="1hr")  # Default 1-hour duration
     class_level = models.CharField(max_length=50, default="N/A")
 
     class_mode = models.CharField(max_length=100, default='Offline')  # Default as 'N/A'

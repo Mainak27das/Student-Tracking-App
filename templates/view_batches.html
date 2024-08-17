@@ -4,16 +4,24 @@
 {% block body %}
 <div class="container-fluid py-5">
     <h2 class="text-center mb-5">Existing Batches</h2>
+
+    <div class="d-flex mb-3">
+        <form class="d-inline-flex ms-auto" method="GET" action="{% url 'view_batches' %}" role="search">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request.GET.search }}">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+
     <div class="table-responsive">
         <table class="table table-striped text-center">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Sl no.</th>
                     <th scope="col">Subject Name</th>
-                    <th scope="col">Batch Time</th>
-                    <th scope="col">Batch Day</th>
-                    <th scope="col">Batch Duration</th>
                     <th scope="col">Class Level</th>
+                    <th scope="col">Batch Day</th>
+                    <th scope="col">Batch Time</th>
+                    <th scope="col">Batch Duration</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">Teacher/Instructor</th>
                 </tr>
@@ -23,10 +31,10 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><a href="{% url 'batch_detail' batch.id %}">{{ batch.subject_name }}</a></td>
-                    <td>{{ batch.batch_time }}</td>
-                    <td>{{ batch.batch_day }}</td>
-                    <td>{{ batch.batch_duration }}</td>
                     <td>{{ batch.class_level }}</td>
+                    <td>{{ batch.batch_day }}</td>
+                    <td>{{ batch.batch_time }}</td>
+                    <td>{{ batch.batch_duration }}</td>
                     <td>{{ batch.start_date }}</td>
                     <td>{{ batch.teacher_name }}</td>
                 </tr>

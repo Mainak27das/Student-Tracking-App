@@ -3,9 +3,21 @@ from .models import Student, Batch
 from .forms import StudentForm, BatchForm
 from django.contrib import messages
 from django.views.generic import DetailView
+from django.db.models import Q
 
 def index(request):
+    search_query = request.GET.get("search", "")
     students = Student.objects.all()
+
+    if search_query:
+        students = students.filter(
+            Q(name__icontains=search_query) |
+            Q(phone_number__icontains=search_query) |
+            Q(board__icontains=search_query) |
+            Q(student_class__icontains=search_query) |
+            Q(payment__icontains=search_query)
+        )
+
     total_students = students.count()
     cbse_students = students.filter(board='CBSE').count()
     wbbse_students = students.filter(board='WBBSE').count()
@@ -17,8 +29,10 @@ def index(request):
         'cbse_students': cbse_students,
         'wbbse_students': wbbse_students,
         'icse_students': icse_students,
+        'search': search_query,
     }
     return render(request, 'index.html', context)
+
 
 def add_student(request):
     if request.method == 'POST':
@@ -31,27 +45,7 @@ def add_student(request):
         form = StudentForm()
     return render(request, 'add_student.html', {'form': form})
 
-def search(request):
-    search = request.GET.get("search", "")
-    
-    if len(search) > 80:
-        all_students = Student.objects.none()
-    else:
-        all_students_name = Student.objects.filter(name__icontains=search)
-        all_students_phone = Student.objects.filter(phone_number__icontains=search)
-        all_students_board = Student.objects.filter(board__icontains=search)
-        all_students_class = Student.objects.filter(student_class__icontains=search)
-        all_students_payment = Student.objects.filter(payment__icontains=search)
-        
-        all_students = all_students_name.union(
-            all_students_phone, 
-            all_students_board, 
-            all_students_class, 
-            all_students_payment
-        )
-    
-    context = {"students": all_students, "search": search}
-    return render(request, "search.html", context)
+
 
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
@@ -71,7 +65,18 @@ def create_batch(request):
     return render(request, 'create_batch.html', {'form': form})
 
 def view_batches(request):
-    batches = Batch.objects.all()
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        batches = Batch.objects.filter(
+            Q(subject_name__icontains=search_query) |
+            Q(class_level__icontains=search_query) |
+            Q(batch_day__icontains=search_query) |
+            Q(teacher_name__icontains=search_query)
+        )
+    else:
+        batches = Batch.objects.all()
+
     return render(request, 'view_batches.html', {'batches': batches})
 
 class BatchDetailView(DetailView):

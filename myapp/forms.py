@@ -22,20 +22,12 @@ class BatchForm(forms.ModelForm):
             'class_level', 'class_mode', 'start_date', 'teacher_name'
         ]
         widgets = {
+            'subject_name': forms.TextInput(attrs={'class': 'form-control'}),
             'batch_time': forms.TimeInput(attrs={'type': 'time'}),
-            'batch_day': forms.Select(choices=[
-                ('Monday', 'Monday'),
-                ('Tuesday', 'Tuesday'),
-                ('Wednesday', 'Wednesday'),
-                ('Thursday', 'Thursday'),
-                ('Friday', 'Friday'),
-                ('Saturday', 'Saturday'),
-                ('Sunday', 'Sunday')
-            ]),
+            'batch_day': forms.TextInput(attrs={'class': 'form-control'}), 
             'batch_duration': forms.TimeInput(attrs={'type': 'time'}),
             'start_date': forms.DateInput(attrs={'type': 'date'}),
-            'batch_status': forms.Select(choices=[
-                ('Active', 'Active'),
-                ('Inactive', 'Inactive')
-            ]),
+            'class_level': forms.TextInput(attrs={'class': 'form-control'}),
+            'class_mode': forms.TextInput(attrs={'class': 'form-control'}),
+            'teacher_name': forms.TextInput(attrs={'class': 'form-control'}),
         }

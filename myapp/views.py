@@ -117,3 +117,23 @@ def add_new_student(request, pk):
     else:
         form = StudentForm()
     return render(request, 'add_new_student.html', {'form': form})
+
+
+def edit_batch(request, id):
+    batch = get_object_or_404(Batch, id=id)
+    if request.method == "POST":
+        form = BatchForm(request.POST, instance=batch)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Batch updated successfully!')
+            return redirect('view_batches')
+    else:
+        form = BatchForm(instance=batch)
+    return render(request, 'edit_batch.html', {'form': form})
+
+def delete_batch(request, id):
+    batch = get_object_or_404(Batch, id=id)
+    if request.method == "POST":
+        batch.delete()
+        return redirect('view_batches')
+    return render(request, 'confirm_delete.html', {'batch': batch})

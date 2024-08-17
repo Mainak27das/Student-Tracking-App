@@ -9,6 +9,7 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
+
     /* Add additional CSS as needed */
 </style>
 {% endblock style %}
@@ -16,7 +17,7 @@
 {% block body %}
 <div class="container-fluid py-4">
     <h1 class="text-center mb-4">Student Management</h1>
-    
+
     <div class="row g-4">
         <!-- Sidebar -->
         <div class="col-lg-3 col-md-4 col-sm-12">
@@ -31,7 +32,7 @@
                             </div>
                             <button id="next-month" class="btn btn-outline-primary">&gt;</button>
                         </div>
-                        
+
                         <div class="calendar-body mt-2">
                             <table class="calendar-table table table-bordered">
                                 <thead>
@@ -54,7 +55,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="col-lg-9 col-md-8 col-sm-12">
             <!-- Statistics Section -->
@@ -97,7 +98,8 @@
                 <div class="card-body">
                     <div class="d-flex flex-wrap justify-content-between">
                         <a href="{% url 'add_student' %}" class="btn btn-success mb-2">Add Student +</a>
-                        <a href="{% url 'create_batch' %}" class="btn btn-primary mb-2">Create Batch</a>
+                        <a href="#" class="btn btn-primary mb-2" data-bs-toggle="modal"
+                            data-bs-target="#createBatchModal">Create Batch</a>
                         <a href="{% url 'view_batches' %}" class="btn btn-secondary mb-2">View Batch</a>
                     </div>
                 </div>
@@ -111,7 +113,8 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title">Student Data</h5>
                 <form method="GET" action="{% url 'index' %}" class="d-inline-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ search }}">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        name="search" value="{{ search }}">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
@@ -133,7 +136,8 @@
                         {% for student in students %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td class="text-wrap"><a href="{% url 'student_profile' student.id %}">{{ student.name }}</a></td>
+                            <td class="text-wrap"><a href="{% url 'student_profile' student.id %}">{{ student.name}}</a>
+                            </td>
                             <td>{{ student.board }}</td>
                             <td>{{ student.student_class }}</td>
                             <td>{{ student.subject }}</td>
@@ -150,10 +154,81 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="createBatchModal" tabindex="-1" aria-labelledby="createBatchModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createBatchModalLabel">Create New Batch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'create_batch' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="id_subject_name" class="form-label fw-bold">Subject</label>
+                                <input type="text" name="subject_name" id="id_subject_name" class="form-control"
+                                    required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="id_batch_time" class="form-label fw-bold">Batch Time</label>
+                                <input type="time" name="batch_time" id="id_batch_time" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="id_batch_day" class="form-label fw-bold">Batch Day</label>
+                                <input type="text" name="batch_day" id="id_batch_day" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="id_class_level" class="form-label fw-bold">Class</label>
+                                <input type="text" name="class_level" id="id_class_level" class="form-control" required>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="id_class_mode" class="form-label fw-bold">Class Mode</label>
+                                <input type="text" name="class_mode" id="id_class_mode" class="form-control" required value="Offline">
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label for="id_start_date" class="form-label fw-bold">Start Date</label>
+                                <input type="date" name="start_date" id="id_start_date" class="form-control" required>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label for="id_teacher_name" class="form-label fw-bold">Teacher/Instructor</label>
+                                <input type="text" name="teacher_name" id="id_teacher_name" class="form-control"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-lg">Create Batch</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </div>
 
 {% block script %}
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var createBatchModal = document.getElementById('createBatchModal');
+        createBatchModal.addEventListener('hidden.bs.modal', function () {
+            var form = createBatchModal.querySelector('form');
+            form.reset(); // Reset the form fields
+        });
+    });
+</script>
 {% endblock script %}
 
 {% endblock body %}

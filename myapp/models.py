@@ -17,12 +17,11 @@ class Batch(models.Model):
     subject_name = models.CharField(max_length=100)
     batch_time = models.TimeField()
     batch_day = models.CharField(max_length=50)
-    batch_duration = models.CharField(max_length=5,default="1hr")  # Default 1-hour duration
-    class_level = models.CharField(max_length=50, default="N/A")
+    class_level = models.CharField(max_length=50)
 
-    class_mode = models.CharField(max_length=100, default='Offline')  # Default as 'N/A'
+    class_mode = models.CharField(max_length=100)  # Default as 'N/A'
     start_date = models.DateField(default=timezone.now)  # Default to current date
-    teacher_name = models.CharField(max_length=100,default='N/A')
+    teacher_name = models.CharField(max_length=100)
     students = models.ManyToManyField(Student, related_name='batches')
 
     def __str__(self):

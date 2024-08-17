@@ -154,8 +154,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="createBatchModal" tabindex="-1" aria-labelledby="createBatchModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="createBatchModal" tabindex="-1" aria-labelledby="createBatchModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,44 +164,44 @@
                 <div class="modal-body">
                     <form action="{% url 'create_batch' %}" method="post">
                         {% csrf_token %}
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="id_batch_name" class="form-label fw-bold">Batch Name</label>
+                                <input type="text" name="batch_name" id="id_batch_name" class="form-control" placeholder="Enter batch name" required>
+                            </div>
+                            <div class="col-md-6">
                                 <label for="id_subject_name" class="form-label fw-bold">Subject</label>
-                                <input type="text" name="subject_name" id="id_subject_name" class="form-control"
-                                    required>
+                                <input type="text" name="subject_name" id="id_subject_name" class="form-control" placeholder="Enter subject" required>
                             </div>
-                            <div class="col-md-6 mb-4">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
                                 <label for="id_batch_time" class="form-label fw-bold">Batch Time</label>
-                                <input type="time" name="batch_time" id="id_batch_time" class="form-control" required>
+                                <input type="time" name="batch_time" id="id_batch_time" class="form-control" placeholder="Select batch time" required>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6">
                                 <label for="id_batch_day" class="form-label fw-bold">Batch Day</label>
-                                <input type="text" name="batch_day" id="id_batch_day" class="form-control" required>
+                                <input type="text" name="batch_day" id="id_batch_day" class="form-control" placeholder="Enter batch day (e.g., Monday)" required>
                             </div>
-                            <div class="col-md-6 mb-4">
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
                                 <label for="id_class_level" class="form-label fw-bold">Class</label>
-                                <input type="text" name="class_level" id="id_class_level" class="form-control" required>
+                                <input type="text" name="class_level" id="id_class_level" class="form-control" placeholder="Enter class" required>
                             </div>
-                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
+                            <div class="col-md-6">
                                 <label for="id_class_mode" class="form-label fw-bold">Class Mode</label>
-                                <input type="text" name="class_mode" id="id_class_mode" class="form-control" required value="Offline">
+                                <input type="text" name="class_mode" id="id_class_mode" class="form-control" placeholder="Enter class mode" required value="Offline">
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <label for="id_start_date" class="form-label fw-bold">Start Date</label>
-                                <input type="date" name="start_date" id="id_start_date" class="form-control" required>
-                            </div>
-
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <label for="id_start_date" class="form-label fw-bold">Start Date</label>
+                                <input type="date" name="start_date" id="id_start_date" class="form-control" placeholder="Select start date" required>
+                            </div>
+                            <div class="col-md-6">
                                 <label for="id_teacher_name" class="form-label fw-bold">Teacher/Instructor</label>
-                                <input type="text" name="teacher_name" id="id_teacher_name" class="form-control"
-                                    required>
+                                <input type="text" name="teacher_name" id="id_teacher_name" class="form-control" placeholder="Enter teacher's name" required>
                             </div>
                         </div>
                         <div class="d-grid">
@@ -213,6 +212,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 
 

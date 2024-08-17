@@ -15,6 +15,7 @@ class Student(models.Model):
 
 class Batch(models.Model):
     subject_name = models.CharField(max_length=100)
+    batch_name = models.CharField(max_length=100,default="")
     batch_time = models.TimeField()
     batch_day = models.CharField(max_length=50)
     class_level = models.CharField(max_length=50)

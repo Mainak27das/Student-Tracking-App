@@ -18,11 +18,12 @@ class BatchForm(forms.ModelForm):
     class Meta:
         model = Batch
         fields = [
-            'subject_name', 'batch_time', 'batch_day', 
+            'subject_name', 'batch_time', 'batch_day','batch_name',
             'class_level', 'class_mode', 'start_date', 'teacher_name'
         ]
         widgets = {
             'subject_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'batch_name': forms.TextInput(attrs={'class': 'form-control'}),
             'batch_time': forms.TimeInput(attrs={'type': 'time'}),
             'batch_day': forms.TextInput(attrs={'class': 'form-control'}), 
             'start_date': forms.DateInput(attrs={'type': 'date'}),

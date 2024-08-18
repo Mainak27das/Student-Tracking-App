@@ -1,38 +1,17 @@
-{% comment %} {% extends "base.html" %}
+{% extends "base.html" %}
+{% block title %}Edit Student{% endblock title %}
+{% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock style %}
+
 {% block body %}
-<div class="container py-5">
-    <h2 class="text-center mb-5">Edit Student</h2>
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10 col-sm-12">
-            <div class="p-4 bg-light shadow-sm rounded">
-                <form method="post">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <label for="id_name" class="form-label fw-bold">Student Name</label>
-                            {{ form.name }}
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <label for="id_school" class="form-label fw-bold">School Name</label>
-                            {{ form.school }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-4">
-                            <label for="id_board" class="form-label fw-bold">Board</label>
-                            {{ form.board }}
-                        </div>
-                        <div class="col-md-6 mb-4">
-                            <label for="id_student_class" class="form-label fw-bold">Class</label>
-                            {{ form.student_class }}
-                        </div>
-                    </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-dark btn-lg">Update Student</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<div class="container py-4">
+    <h2>Edit Student</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
 </div>
-{% endblock %} {% endcomment %}
+{% endblock body %}

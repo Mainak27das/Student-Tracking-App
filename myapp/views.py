@@ -145,3 +145,23 @@ def remove_student_from_batch(request, batch_id, student_id):
     batch.students.remove(student)
     messages.success(request, f'{student.name} has been removed from the batch.')
     return redirect('batch_detail', pk=batch.id)
+
+def edit_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Student profile updated successfully!')
+            return redirect('student_profile', student_id=student.id)
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'edit_student.html', {'form': form, 'student': student})
+
+def delete_student(request, student_id):
+    student = get_object_or_404(Student, id=student_id)
+    if request.method == 'POST':
+        student.delete()
+        messages.success(request, 'Student profile deleted successfully!')
+        return redirect('index')
+    return render(request, 'confirm_delete_student.html', {'student': student})

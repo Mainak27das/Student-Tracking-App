@@ -16,8 +16,10 @@ urlpatterns = [
     path('edit-batch/<int:id>/', views.edit_batch, name='edit_batch'),
     # Ensure there's also a delete_batch path
     path('delete-batch/<int:id>/', views.delete_batch, name='delete_batch'),
-
     path('batch/<int:batch_id>/remove_student/<int:student_id>/', views.remove_student_from_batch, name='remove_student_from_batch'),
+
+    path('student/<int:student_id>/edit/', views.edit_student, name='edit_student'),
+    path('student/<int:student_id>/delete/', views.delete_student, name='delete_student'),
 ]
 
 

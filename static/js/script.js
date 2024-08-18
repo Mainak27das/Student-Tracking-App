@@ -42,3 +42,14 @@
          renderCalendar(currentDate);
      });
  });
+
+
+//  create batch  Modal
+
+document.addEventListener('DOMContentLoaded', function () {
+    var createBatchModal = document.getElementById('createBatchModal');
+    createBatchModal.addEventListener('hidden.bs.modal', function () {
+        var form = createBatchModal.querySelector('form');
+        form.reset(); 
+    });
+});

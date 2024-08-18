@@ -8,9 +8,9 @@ class StudentForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter phone number'}),
-            'board': forms.Select(attrs={'class': 'form-control'}),  # 'board' is a choice field
+            'board': forms.Select(attrs={'class': 'form-control'}),  
             'student_class': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
-            'payment': forms.Select(attrs={'class': 'form-control'}),  # 'payment' is a choice field
+            'payment': forms.Select(attrs={'class': 'form-control'}), 
             'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject'}),
         }
 

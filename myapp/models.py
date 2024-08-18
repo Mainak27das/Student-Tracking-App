@@ -20,8 +20,8 @@ class Batch(models.Model):
     batch_day = models.CharField(max_length=50)
     class_level = models.CharField(max_length=50)
 
-    class_mode = models.CharField(max_length=100)  # Default as 'N/A'
-    start_date = models.DateField(default=timezone.now)  # Default to current date
+    class_mode = models.CharField(max_length=100)  
+    start_date = models.DateField(default=timezone.now) 
     teacher_name = models.CharField(max_length=100)
     students = models.ManyToManyField(Student, related_name='batches')
 

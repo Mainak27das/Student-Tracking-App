@@ -5,7 +5,6 @@ from .views import create_batch, view_batches, BatchDetailView, add_existing_stu
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('add/', views.add_student, name='add_student'),
     # path('edit/<int:student_id>/', views.edit_student, name='edit_student'),  # Uncomment if needed
     path('student/<int:student_id>/', views.student_profile, name='student_profile'),
     path('create-batch/', create_batch, name='create_batch'),

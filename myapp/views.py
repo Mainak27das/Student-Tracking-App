@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.views.generic import DetailView
 from django.db.models import Q
 
+# Home Page with Student List and Search
 def index(request):
     search_query = request.GET.get("search", "")
     students = Student.objects.all()
@@ -33,26 +34,17 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-def add_student(request):
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Student Added!!")
-            return redirect('index')
-    else:
-        form = StudentForm()
-    return render(request, 'add_student.html', {'form': form})
-
+# Student Profile Page
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
-    batches = Batch.objects.filter(students=student)  # Get batches where this student is present
+    batches = Batch.objects.filter(students=student)
     context = {
         'student': student,
         'batches': batches,
     }
     return render(request, 'student_profile.html', context)
 
+# Create a New Batch
 def create_batch(request):
     if request.method == "POST":
         form = BatchForm(request.POST)
@@ -64,6 +56,7 @@ def create_batch(request):
         form = BatchForm()
     return render(request, 'create_batch.html', {'form': form})
 
+# View All Batches
 def view_batches(request):
     search_query = request.GET.get('search', '')
 
@@ -79,6 +72,7 @@ def view_batches(request):
 
     return render(request, 'view_batches.html', {'batches': batches})
 
+# Batch Detail View
 class BatchDetailView(DetailView):
     model = Batch
     template_name = 'batch_detail.html'
@@ -86,10 +80,10 @@ class BatchDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Exclude students already in the batch
         context['students'] = Student.objects.exclude(id__in=self.object.students.all())
         return context
 
+# Add Existing Students to a Batch
 def add_existing_students(request, pk):
     batch = get_object_or_404(Batch, pk=pk)
     if request.method == 'POST':
@@ -106,6 +100,7 @@ def add_existing_students(request, pk):
     
     return redirect('batch_detail', pk=pk)
 
+# Add a New Student to a Batch
 def add_new_student(request, pk):
     batch = get_object_or_404(Batch, pk=pk)
     if request.method == 'POST':
@@ -119,6 +114,7 @@ def add_new_student(request, pk):
         form = StudentForm()
     return render(request, 'add_new_student.html', {'form': form})
 
+# Edit Batch Details
 def edit_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
     if request.method == "POST":
@@ -131,6 +127,7 @@ def edit_batch(request, id):
         form = BatchForm(instance=batch)
     return render(request, 'edit_batch.html', {'form': form})
 
+# Delete a Batch
 def delete_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
     if request.method == "POST":
@@ -139,6 +136,7 @@ def delete_batch(request, id):
         return redirect('view_batches')
     return render(request, 'confirm_delete.html', {'batch': batch})
 
+# Remove a Student from a Batch
 def remove_student_from_batch(request, batch_id, student_id):
     batch = get_object_or_404(Batch, id=batch_id)
     student = get_object_or_404(Student, id=student_id)
@@ -146,6 +144,7 @@ def remove_student_from_batch(request, batch_id, student_id):
     messages.success(request, f'{student.name} has been removed from the batch.')
     return redirect('batch_detail', pk=batch.id)
 
+# Edit Student Profile
 def edit_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     if request.method == 'POST':
@@ -158,6 +157,7 @@ def edit_student(request, student_id):
         form = StudentForm(instance=student)
     return render(request, 'edit_student.html', {'form': form, 'student': student})
 
+# Delete Student Profile
 def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     if request.method == 'POST':

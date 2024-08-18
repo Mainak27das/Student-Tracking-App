@@ -46,8 +46,10 @@ def add_student(request):
 
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
+    batches = Batch.objects.filter(students=student)  # Get batches where this student is present
     context = {
         'student': student,
+        'batches': batches,
     }
     return render(request, 'student_profile.html', context)
 
@@ -56,7 +58,8 @@ def create_batch(request):
         form = BatchForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            messages.success(request, "Batch created successfully!")
+            return redirect('view_batches')
     else:
         form = BatchForm()
     return render(request, 'create_batch.html', {'form': form})
@@ -132,6 +135,7 @@ def delete_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
     if request.method == "POST":
         batch.delete()
+        messages.success(request, 'Batch deleted successfully!')
         return redirect('view_batches')
     return render(request, 'confirm_delete.html', {'batch': batch})
 

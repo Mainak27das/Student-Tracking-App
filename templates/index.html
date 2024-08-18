@@ -136,7 +136,7 @@
                         {% for student in students %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td class="text-wrap"><a href="{% url 'student_profile' student.id %}">{{ student.name}}</a>
+                            <td class="text-wrap"><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name}}</a>
                             </td>
                             <td>{{ student.board }}</td>
                             <td>{{ student.student_class }}</td>

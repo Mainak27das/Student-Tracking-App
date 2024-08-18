@@ -33,7 +33,7 @@
                 {% for batch in batches %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="{% url 'batch_detail' batch.id %}">{{ batch.subject_name }}</a></td>
+                    <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.subject_name }}</a></td>
                     <td>{{ batch.class_level }}</td>
                     <td>{{ batch.batch_day }}</td>
                     <td>{{ batch.batch_time }}</td>

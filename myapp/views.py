@@ -135,3 +135,9 @@ def delete_batch(request, id):
         return redirect('view_batches')
     return render(request, 'confirm_delete.html', {'batch': batch})
 
+def remove_student_from_batch(request, batch_id, student_id):
+    batch = get_object_or_404(Batch, id=batch_id)
+    student = get_object_or_404(Student, id=student_id)
+    batch.students.remove(student)
+    messages.success(request, f'{student.name} has been removed from the batch.')
+    return redirect('batch_detail', pk=batch.id)

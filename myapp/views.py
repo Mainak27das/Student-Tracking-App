@@ -33,7 +33,6 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
 def add_student(request):
     if request.method == 'POST':
         form = StudentForm(request.POST)
@@ -44,8 +43,6 @@ def add_student(request):
     else:
         form = StudentForm()
     return render(request, 'add_student.html', {'form': form})
-
-
 
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
@@ -86,7 +83,8 @@ class BatchDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['students'] = Student.objects.all()
+        # Exclude students already in the batch
+        context['students'] = Student.objects.exclude(id__in=self.object.students.all())
         return context
 
 def add_existing_students(request, pk):
@@ -94,8 +92,8 @@ def add_existing_students(request, pk):
     if request.method == 'POST':
         student_ids = request.POST.getlist('existing_students')
         existing_students = batch.students.all().values_list('id', flat=True)
-        new_students = [Student.objects.get(id=id) for id in student_ids if id not in existing_students]
-        duplicate_students = [Student.objects.get(id=id) for id in student_ids if id in existing_students]
+        new_students = [Student.objects.get(id=id) for id in student_ids if int(id) not in existing_students]
+        duplicate_students = [Student.objects.get(id=id) for id in student_ids if int(id) in existing_students]
         
         if new_students:
             batch.students.add(*new_students)
@@ -118,7 +116,6 @@ def add_new_student(request, pk):
         form = StudentForm()
     return render(request, 'add_new_student.html', {'form': form})
 
-
 def edit_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
     if request.method == "POST":
@@ -137,3 +134,4 @@ def delete_batch(request, id):
         batch.delete()
         return redirect('view_batches')
     return render(request, 'confirm_delete.html', {'batch': batch})
+

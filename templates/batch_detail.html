@@ -3,38 +3,48 @@
 
 {% block body %}
 <div class="container py-4">
-    <div class="row mb-4">
-        <div class="col text-center">
-            <h2 class="text-uppercase">Batch: {{ batch.batch_name }}</h2>
+    <!-- Header Section -->
+    <div class="row mb-4 text-center">
+        <div class="col-12 col-md-6 mb-2 mb-md-0">
+            <h2 class="text-uppercase fw-bold">Batch: {{ batch.batch_name }}</h2>
         </div>
-        <div class="col text-center">
-            <h2 class="text-uppercase">Subject: {{ batch.subject_name }}</h2>
+        <div class="col-12 col-md-6">
+            <h2 class="text-uppercase fw-bold">Subject: {{ batch.subject_name }}</h2>
         </div>
     </div>
     
-    <!-- Batch Details -->
+    <!-- Batch Details Card -->
     <div class="card my-4 shadow-sm border-0">
         <div class="card-body">
             <div class="row">
-                <h5 class="card-title col">Batch Day: <span class="text-uppercase text-primary">{{ batch.batch_day }}</span></h5>
-                <h5 class="card-title col">Batch Starts: <span class="text">{{ batch.batch_time }}</span></h5>
+                <div class="col-12 col-md-6 mb-2 mb-md-0">
+                    <h5 class="card-title">Batch Day: <span class="text-uppercase text-primary">{{ batch.batch_day }}</span></h5>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h5 class="card-title">Batch Starts: <span class="text">{{ batch.batch_time }}</span></h5>
+                </div>
+                <div class="col-12 mt-2">
+                    <h5 class="card-title">Total Students: <span class="text">{{ batch.students.count }}</span></h5>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- List of Students in the Batch -->
+    <!-- Students in the Batch -->
     <div class="card my-4 shadow-sm border-0">
         <div class="card-body">
-            <h5 class="card-title mb-4">Students in This Batch</h5>
-            
-            <form class="d-inline-flex p-2" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-            <button type="button" class="btn btn-danger" id="toggleDelete">RemoveStudent</button>
-
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                <h5 class="card-title mb-2 mb-md-0">Students in This Batch</h5>
+                <div class="d-flex flex-column flex-md-row align-items-center">
+                    <form class="d-inline-flex mb-2 mb-md-0 me-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search students..." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <button type="button" class="btn btn-danger" id="toggleDelete">Remove Student</button>
+                </div>
+            </div>
             <div class="table-responsive">
-                <table class="table table-striped table-hover text-center">
+                <table class="table table-striped text-center">
                     <thead class="table-dark">
                         <tr>
                             <th scope="col">ID</th>
@@ -51,27 +61,26 @@
                         {% for student in batch.students.all %}
                         <tr>
                             <td>{{ student.id }}</td>
-                            <td><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name}}</a></td>
+                            <td><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name }}</a></td>
                             <td>{{ student.phone_number }}</td>
                             <td>{{ student.board }}</td>
                             <td>{{ student.student_class }}</td>
                             <td>{{ batch.subject_name }}</td>
                             <td>{{ student.payment }}</td>
                             <td class="delete-column d-none">
-                                <form action="{% url 'remove_student_from_batch' batch.id student.id %}" method="post" style="display:inline;">
+                                <form action="{% url 'remove_student_from_batch' batch.id student.id %}" method="post" class="d-inline">
                                     {% csrf_token %}
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger btn-sm">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                                         </svg>
                                     </button>
                                 </form>
                             </td>
-                            
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="7" class="text-center">No students in this batch.</td>
+                            <td colspan="8" class="text-center text-muted">No students in this batch.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -90,10 +99,10 @@
             <form method="post" action="{% url 'add_existing_students' batch.id %}">
                 {% csrf_token %}
                 <div class="table-container" style="max-height: 200px; overflow-y: auto;">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped">
                         <thead class="table-dark sticky-top">
                             <tr>
-                                <th scope="col">Slno.</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Select</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Class</th>
@@ -112,21 +121,23 @@
                                             {% endif %}
                                         >
                                     </td>
-                                    <td><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name}}</a></td>
+                                    <td><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name }}</a></td>
                                     <td>{{ student.student_class }}</td>
                                     <td>{{ student.board }}</td>
                                     <td>{{ student.phone_number }}</td>
                                 </tr>
                             {% empty %}
                                 <tr>
-                                    <td colspan="7" class="text-center">No students available.</td>
+                                    <td colspan="7" class="text-center text-muted">No students available.</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Add Students</button>
-                <button type="button" id="unselectButton" class="btn btn-outline-secondary mt-3">Unselect All</button>
+                <div class="d-flex flex-column flex-md-row justify-content-between mt-3">
+                    <button type="submit" class="btn btn-primary">Add Students</button>
+                    <button type="button" id="unselectButton" class="btn btn-outline-secondary mt-2 mt-md-0">Unselect All</button>
+                </div>
             </form>
         </div>
     </div>
@@ -136,23 +147,23 @@
 <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: rgb(37, 37, 37); color: white;">
+            <div class="modal-header">
                 <h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
+                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body" style="background-color: rgb(248, 249, 250);">
+            <div class="modal-body bg-light">
                 <form method="post" action="{% url 'add_new_student' batch.id %}">
                     {% csrf_token %}
-                    <div class="row row-cols-2">
-                        <div class="col mb-3">
+                    <div class="row row-cols-1 row-cols-md-2 g-3">
+                        <div class="col">
                             <label for="studentName" class="form-label fw-bold">Student Name:</label>
                             <input type="text" id="studentName" name="name" class="form-control" required>
                         </div>
-                        <div class="col mb-3">
+                        <div class="col">
                             <label for="studentPhone" class="form-label fw-bold">Phone Number:</label>
                             <input type="text" id="studentPhone" name="phone_number" class="form-control">
                         </div>
-                        <div class="col mb-3">
+                        <div class="col">
                             <label for="studentBoard" class="form-label fw-bold">Board:</label>
                             <select id="studentBoard" name="board" class="form-select">
                                 <option value="CBSE">CBSE</option>
@@ -160,47 +171,36 @@
                                 <option value="ICSE">ICSE</option>
                             </select>
                         </div>
-                        <div class="col mb-3">
+                        <div class="col">
                             <label for="studentClass" class="form-label fw-bold">Class:</label>
-                            <input type="text" id="studentClass" name="student_class" class="form-control">
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentPayment" class="form-label fw-bold">Payment Status:</label>
-                            <select id="studentPayment" name="payment" class="form-select">
-                                <option value="DONE">DONE</option>
-                                <option value="NOT DONE">NOT DONE</option>
-                            </select>
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentSubject" class="form-label fw-bold">Subject:</label>
-                            <input type="text" id="studentSubject" name="subject" class="form-control" value="{{ batch.subject_name }}" readonly>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-dark btn-lg">Add Student</button>
+                            <input type="text" id="studentClass" name="student_class" class="form-control" required>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary mt-3">Add Student</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Script to Unselect All Options -->
+<!-- JavaScript for toggle delete button -->
 <script>
-    document.getElementById('unselectButton').addEventListener('click', function() {
-        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="existing_students"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
-    });
-
-     // Toggle Delete column visibility
-     document.getElementById('toggleDelete').addEventListener('click', function () {
-        const deleteColumns = document.querySelectorAll('.delete-column');
+    const toggleDeleteButton = document.getElementById('toggleDelete');
+    const deleteColumns = document.querySelectorAll('.delete-column');
+    
+    toggleDeleteButton.addEventListener('click', () => {
         deleteColumns.forEach(column => {
             column.classList.toggle('d-none');
         });
     });
-</script>
 
-{% endblock body %}
+    const unselectButton = document.getElementById('unselectButton');
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    unselectButton.addEventListener('click', () => {
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+    });
+</script>
+{% endblock %}

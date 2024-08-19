@@ -4,10 +4,10 @@
 {% block body %}
 <div class="container-fluid py-5">
     <h2 class="text-center mb-5">Existing Batches</h2>
-    <button type="button" class="btn btn-warning" id="toggleEdit">Edit</button>
-    <button type="button" class="btn btn-danger" id="toggleDelete">Delete</button>
-
     <div class="d-flex mb-3">
+        <button type="button" class="btn btn-warning me-2" id="toggleEdit">Edit</button>
+        <button type="button" class="btn btn-danger" id="toggleDelete">Delete</button>
+        
         <form class="d-inline-flex ms-auto" method="GET" action="{% url 'view_batches' %}" role="search">
             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request.GET.search }}">
             <button class="btn btn-outline-success" type="submit">Search</button>

@@ -36,8 +36,8 @@
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
                 <h5 class="card-title mb-2 mb-md-0">Students in This Batch</h5>
                 <div class="d-flex flex-column flex-md-row align-items-center">
-                    <form class="d-inline-flex mb-2 mb-md-0 me-3" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search students..." aria-label="Search">
+                    <form class="d-inline-flex mb-2 mb-md-0 me-3" role="search" method="GET"> {% csrf_token %}
+                        <input class="form-control me-2" name="search_batch_student" type="text" placeholder="Search students..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                     <button type="button" class="btn btn-danger" id="toggleDelete">Remove Student</button>
@@ -58,7 +58,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for student in batch.students.all %}
+                        {% for student in students %}
                         <tr>
                             <td>{{ student.id }}</td>
                             <td><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name }}</a></td>
@@ -95,7 +95,15 @@
     <!-- Add Existing Students -->
     <div class="card mb-4 shadow-sm border-0">
         <div class="card-body">
-            <h5 class="card-title mb-4">Add Existing Students</h5>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+                <h5 class="card-title mb-4">Add Existing Students</h5>
+                <div class="d-flex flex-column flex-md-row align-items-center">
+                        <form class="d-inline-flex mb-2 mb-md-0 me-3" role="search" method="GET"> {% csrf_token %}
+                            <input class="form-control me-2" name="search_remaining_student" type="text" placeholder="Search students..." aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                </div>
+            </div>
             <form method="post" action="{% url 'add_existing_students' batch.id %}">
                 {% csrf_token %}
                 <div class="table-container" style="max-height: 200px; overflow-y: auto;">
@@ -111,7 +119,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for student in students %}
+                            {% for student in remaining_students %}
                                 <tr>
                                     <td>{{ student.id }}</td>
                                     <td>

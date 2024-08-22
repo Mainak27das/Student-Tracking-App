@@ -80,7 +80,31 @@ class BatchDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['students'] = Student.objects.exclude(id__in=self.object.students.all())
+        if self.request.GET.get('search_batch_student'):
+            search_query = self.request.GET.get('search_batch_student')
+            students = Student.objects.filter(
+                Q(name__icontains=search_query) |
+                Q(phone_number__icontains=search_query) |
+                Q(board__icontains=search_query) |
+                Q(student_class__icontains=search_query) |
+                Q(payment__icontains=search_query)
+            )
+            context['students'] = students.filter(batches=self.object)
+            
+        else:
+            context['students'] = self.object.students.all()
+        
+        if self.request.GET.get('search_remaining_student'):
+            search_query = self.request.GET.get('search_remaining_student')
+            context['remaining_students'] = Student.objects.exclude(id__in=self.object.students.all()).filter(
+                Q(name__icontains=search_query) |
+                Q(phone_number__icontains=search_query) |
+                Q(board__icontains=search_query) |
+                Q(student_class__icontains=search_query) |
+                Q(payment__icontains=search_query)
+            )
+        else:
+            context['remaining_students'] = Student.objects.exclude(id__in=self.object.students.all())
         return context
 
 # Add Existing Students to a Batch

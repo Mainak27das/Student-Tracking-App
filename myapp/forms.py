@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student,Batch
+from .models import Student,Batch,Teacher
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -30,4 +30,15 @@ class BatchForm(forms.ModelForm):
             'class_level': forms.TextInput(attrs={'class': 'form-control'}),
             'class_mode': forms.TextInput(attrs={'class': 'form-control'}),
             'teacher_name': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        model = Teacher
+        fields = ['name', 'phone_number', 'subject_teaches', 'qualification']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter teacher name'}),
+            'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter phone number'}),
+            'subject_teaches': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject taught'}),
+            'qualification': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter qualification'}),
         }

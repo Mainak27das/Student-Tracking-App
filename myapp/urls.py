@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from myapp import views
-from .views import create_batch, view_batches, BatchDetailView, add_existing_students, add_new_student
+from .views import create_batch, view_batches, BatchDetailView, add_existing_students, add_new_student,edit_teacher, delete_teacher
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -19,6 +19,11 @@ urlpatterns = [
 
     path('student/<int:student_id>/edit/', views.edit_student, name='edit_student'),
     path('student/<int:student_id>/delete/', views.delete_student, name='delete_student'),
+
+    path('add-teacher/', views.add_teacher, name='add_teacher'),
+
+    path('edit_teacher/<int:teacher_id>/', edit_teacher, name='edit_teacher'),
+    path('delete_teacher/<int:teacher_id>/', delete_teacher, name='delete_teacher'),
 ]
 
 

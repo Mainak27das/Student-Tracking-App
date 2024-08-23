@@ -27,3 +27,13 @@ class Batch(models.Model):
 
     def __str__(self):
         return f"{self.subject_name} - {self.batch_day} at {self.batch_time}"
+
+
+class Teacher(models.Model):
+    name = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=15)
+    subject_teaches = models.CharField(max_length=100)
+    qualification = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name

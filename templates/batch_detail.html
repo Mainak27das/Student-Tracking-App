@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Batch Details{% endblock title %}
+{% load static %}
+{% block style %}
+
+{% endblock style %}
 
 {% block body %}
 <div class="container py-4">
@@ -47,7 +51,7 @@
                 <table class="table table-striped text-center">
                     <thead class="table-dark">
                         <tr>
-                            <th scope="col">ID</th>
+                            <th scope="col">Slno.</th>
                             <th scope="col">Name</th>
                             <th scope="col">Phone Number</th>
                             <th scope="col">Board</th>
@@ -60,7 +64,7 @@
                     <tbody>
                         {% for student in students %}
                         <tr>
-                            <td>{{ student.id }}</td>
+                            <th scope="row">{{ forloop.counter }}</th>
                             <td><a href="{% url 'student_profile' student.id %}" class="text-decoration-none">{{ student.name }}</a></td>
                             <td>{{ student.phone_number }}</td>
                             <td>{{ student.board }}</td>
@@ -110,7 +114,7 @@
                     <table class="table table-striped">
                         <thead class="table-dark sticky-top">
                             <tr>
-                                <th scope="col">ID</th>
+                                <th scope="col">Slno.</th>
                                 <th scope="col">Select</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Class</th>
@@ -121,7 +125,7 @@
                         <tbody>
                             {% for student in remaining_students %}
                                 <tr>
-                                    <td>{{ student.id }}</td>
+                                    <th scope="row">{{ forloop.counter }}</th>
                                     <td>
                                         <input type="checkbox" name="existing_students" value="{{ student.id }}" 
                                             {% if student in batch.students.all %} 
@@ -155,23 +159,23 @@
 <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="background-color: rgb(37, 37, 37); color: white;">
                 <h5 class="modal-title" id="addStudentModalLabel">Add New Student</h5>
-                <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: white;"></button>
             </div>
-            <div class="modal-body bg-light">
+            <div class="modal-body" style="background-color: rgb(248, 249, 250);">
                 <form method="post" action="{% url 'add_new_student' batch.id %}">
                     {% csrf_token %}
-                    <div class="row row-cols-1 row-cols-md-2 g-3">
-                        <div class="col">
+                    <div class="row row-cols-2">
+                        <div class="col mb-3">
                             <label for="studentName" class="form-label fw-bold">Student Name:</label>
                             <input type="text" id="studentName" name="name" class="form-control" required>
                         </div>
-                        <div class="col">
+                        <div class="col mb-3">
                             <label for="studentPhone" class="form-label fw-bold">Phone Number:</label>
                             <input type="text" id="studentPhone" name="phone_number" class="form-control">
                         </div>
-                        <div class="col">
+                        <div class="col mb-3">
                             <label for="studentBoard" class="form-label fw-bold">Board:</label>
                             <select id="studentBoard" name="board" class="form-select">
                                 <option value="CBSE">CBSE</option>
@@ -179,12 +183,25 @@
                                 <option value="ICSE">ICSE</option>
                             </select>
                         </div>
-                        <div class="col">
+                        <div class="col mb-3">
                             <label for="studentClass" class="form-label fw-bold">Class:</label>
-                            <input type="text" id="studentClass" name="student_class" class="form-control" required>
+                            <input type="text" id="studentClass" name="student_class" class="form-control">
+                        </div>
+                        <div class="col mb-3">
+                            <label for="studentPayment" class="form-label fw-bold">Payment Status:</label>
+                            <select id="studentPayment" name="payment" class="form-select">
+                                <option value="DONE">DONE</option>
+                                <option value="NOT DONE">NOT DONE</option>
+                            </select>
+                        </div>
+                        <div class="col mb-3">
+                            <label for="studentSubject" class="form-label fw-bold">Subject:</label>
+                            <input type="text" id="studentSubject" name="subject" class="form-control" value="{{ batch.subject_name }}" readonly>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-lg">Add Student</button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Add Student</button>
                 </form>
             </div>
         </div>
@@ -192,23 +209,7 @@
 </div>
 
 <!-- JavaScript for toggle delete button -->
-<script>
-    const toggleDeleteButton = document.getElementById('toggleDelete');
-    const deleteColumns = document.querySelectorAll('.delete-column');
-    
-    toggleDeleteButton.addEventListener('click', () => {
-        deleteColumns.forEach(column => {
-            column.classList.toggle('d-none');
-        });
-    });
-
-    const unselectButton = document.getElementById('unselectButton');
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-    unselectButton.addEventListener('click', () => {
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
-    });
-</script>
-{% endblock %}
+{% block script %}
+<script type="text/javascript" src="{% static 'js/batchdetails_script.js' %}"></script>
+{% endblock script %}
+{% endblock body %}

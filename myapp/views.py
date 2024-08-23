@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student, Batch
-from .forms import StudentForm, BatchForm
+from .models import Student, Batch,Teacher
+from .forms import StudentForm, BatchForm,TeacherForm
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.db.models import Q
@@ -189,3 +189,52 @@ def delete_student(request, student_id):
         messages.success(request, 'Student profile deleted successfully!')
         return redirect('index')
     return render(request, 'confirm_delete_student.html', {'student': student})
+
+# Add a Teacher/Instructor
+def add_teacher(request):
+    search_query = request.GET.get('search', '')  # Get the search query
+
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Teacher added successfully!')
+            return redirect('add_teacher')  # Redirect to the same page after saving
+    else:
+        form = TeacherForm()
+
+    # Filter teachers based on search query
+    if search_query:
+        teachers = Teacher.objects.filter(
+            Q(name__icontains=search_query) |
+            Q(phone_number__icontains=search_query) |
+            Q(subject_teaches__icontains=search_query) |
+            Q(qualification__icontains=search_query)
+        )
+    else:
+        teachers = Teacher.objects.all()
+
+    return render(request, 'add_teacher.html', {'form': form, 'teachers': teachers, 'search': search_query})
+
+
+# Edit teacher view
+def edit_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Teacher table updated successfully!')
+            return redirect('add_teacher')
+    else:
+        form = TeacherForm(instance=teacher)
+    return render(request, 'edit_teacher.html', {'form': form})
+
+# Delete teacher view
+def delete_teacher(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    if request.method == 'POST':
+        teacher.delete()
+        messages.success(request, 'Teacher table Deleted successfully!')
+        return redirect('add_teacher')
+

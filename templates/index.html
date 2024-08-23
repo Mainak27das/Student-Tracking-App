@@ -90,6 +90,7 @@
                     <div class="d-flex justify-content-start gap-2">
                         <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createBatchModal">Create Batch</a>
                         <a href="{% url 'view_batches' %}" class="btn btn-secondary">View Batch</a>
+                        <a href="{% url 'add_teacher' %}" class="btn btn-secondary">Add Teacher/Instructor</a>
                     </div>
                 </div>
             </div>
@@ -216,7 +217,7 @@
 </div>
 
 
-</div>
+
 
 {% block script %}
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>

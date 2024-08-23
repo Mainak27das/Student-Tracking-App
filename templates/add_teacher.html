@@ -16,17 +16,6 @@
         </button>
     </div>
 
-    <div class="d-flex mb-3">
-        <button type="button" class="btn btn-warning me-2" id="toggleEdit">Edit</button>
-        <button type="button" class="btn btn-danger" id="toggleDelete">Delete</button>
-        
-        <form class="d-inline-flex ms-auto" method="GET" action="{% url 'add_teacher' %}" role="search">
-            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request.GET.search }}">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      
-    </div>
-
     <!-- Modal -->
     <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -74,6 +63,17 @@
     </div>
 
     <h3 class="mt-5 text-center">Teacher List</h3>
+    
+    <div class="d-flex mb-3">
+        <button type="button" class="btn btn-warning me-2" id="toggleEdit">Edit</button>
+        <button type="button" class="btn btn-danger" id="toggleDelete">Delete</button>
+        
+        <form class="d-inline-flex ms-auto" method="GET" action="{% url 'add_teacher' %}" role="search">
+            <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request.GET.search }}">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      
+    </div>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead class="table-dark">

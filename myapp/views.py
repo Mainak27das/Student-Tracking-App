@@ -49,12 +49,17 @@ def student_profile(request, student_id):
 def create_batch(request):
     if request.method == "POST":
         form = BatchForm(request.POST)
+        print(request.method)
         if form.is_valid():
             form.save()
             messages.success(request, "Batch created successfully!")
             return redirect('view_batches')
+        else:
+            print(form.errors)
+            messages.error(request, "Error creating batch. Please try again.")
     else:
         form = BatchForm()
+    return redirect('index')
     # return render(request, 'wrong.html', {'form': form})
 
 # View All Batches

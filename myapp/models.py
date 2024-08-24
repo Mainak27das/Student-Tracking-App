@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import timedelta
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
@@ -24,25 +25,24 @@ class Teacher(models.Model):
         return self.name
     
 class Batch(models.Model):
-    days = [
-        ('MON', 'MONDAY'),
-        ('TUE', 'TUESDAY'),
-        ('WED', 'WEDNESDAY'),
-        ('THU', 'THURSDAY'),
-        ('FRI', 'FRIDAY'),
-        ('SAT', 'SATURDAY'),
-        ('SUN', 'SUNDAY'),
+    DAYS = [
+        ('MON', 'Monday'),
+        ('TUE', 'Tuesday'),
+        ('WED', 'Wednesday'),
+        ('THU', 'Thursday'),
+        ('FRI', 'Friday'),
+        ('SAT', 'Saturday'),
+        ('SUN', 'Sunday'),
     ]
     subject_name = models.CharField(max_length=100)
     batch_name = models.CharField(max_length=100,default="")
     batch_time = models.TimeField()
-    batch_day = models.CharField(max_length=50, choices=days)
+    batch_day = MultiSelectField(choices=DAYS)
     class_level = models.IntegerField(choices=[(1,1),(2,2),(3,3),(4,4),(5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
-
     class_mode = models.CharField(max_length=100, choices=[('ONLINE', 'ONLINE'), ('OFFLINE', 'OFFLINE')], default='ONLINE')  
     start_date = models.DateField(default=timezone.now) 
     teachers = models.ManyToManyField(Teacher, related_name='teachers')
-    students = models.ManyToManyField(Student, related_name='students', blank=True, null=True)
+    students = models.ManyToManyField(Student, related_name='students', blank=True)
 
     def __str__(self):
         return f"{self.subject_name} - {self.batch_day} at {self.batch_time}"

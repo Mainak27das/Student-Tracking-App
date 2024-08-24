@@ -158,11 +158,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #6c757d;"></button>
                 </div>
                 <div class="modal-body" style="background-color: #f8f9fa;">
-                    <form action="{% url 'create_batch' %}" method="post">
+                    <form action="{% url 'create_batch' %}" method="post" >
                         {% csrf_token %}
-                        <div class="batch-form">
+                        {% comment %} <div class="batch-form"> {% endcomment %}
                             {{ batch_form.as_p }}
-                        </div>
+                        {% comment %} </div> {% endcomment %}
                         <div class="d-grid">
                             <button type="submit" class="btn btn-dark btn-lg">Create Batch</button>
                         </div>

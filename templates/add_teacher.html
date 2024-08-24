@@ -20,47 +20,48 @@
     <div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
+                <div class="modal-header" style="background-color: #343a40; color: white;">
                     <h5 class="modal-title" id="addTeacherModalLabel">Add Teacher/Instructor</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #6c757d;"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="background-color: #f8f9fa;">
                     <form method="post">
                         {% csrf_token %}
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form.name.label_tag }}
+                                    <label for="id_name" class="form-label fw-bold">Name:</label>
                                     {{ form.name }}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form.phone_number.label_tag }}
+                                    <label for="id_phone_number" class="form-label fw-bold">Phone Number:</label>
                                     {{ form.phone_number }}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form.subject_teaches.label_tag }}
+                                    <label for="id_subject_teaches" class="form-label fw-bold">Subject Teaches:</label>
                                     {{ form.subject_teaches }}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form.qualification.label_tag }}
+                                    <label for="id_qualification" class="form-label fw-bold">Qualification:</label>
                                     {{ form.qualification }}
                                 </div>
                             </div>
                         </div>
                         <div class="text-center mt-4">
-                            <button type="submit" class="btn btn-primary">Add Teacher</button>
+                            <button type="submit" class="btn btn-dark btn-lg">Add Teacher</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    
 
     <h3 class="mt-5 text-center">Teacher List</h3>
     

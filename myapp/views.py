@@ -54,7 +54,7 @@ def create_batch(request):
             return redirect('view_batches')
     else:
         form = BatchForm()
-    return render(request, 'create_batch.html', {'form': form})
+    # return render(request, 'wrong.html', {'form': form})
 
 # View All Batches
 def view_batches(request):
@@ -136,7 +136,7 @@ def add_new_student(request, pk):
             return redirect('batch_detail', pk=pk)
     else:
         form = StudentForm()
-    return render(request, 'add_new_student.html', {'form': form})
+    # return render(request, 'add_new_student.html', {'form': form})
 
 # Edit Batch Details
 def edit_batch(request, id):

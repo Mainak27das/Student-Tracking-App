@@ -18,18 +18,18 @@ class BatchForm(forms.ModelForm):
     class Meta:
         model = Batch
         fields = [
-            'subject_name', 'batch_time', 'batch_day','batch_name',
+            'subject_name', 'batch_name', 'batch_time', 'batch_day',
             'class_level', 'class_mode', 'start_date', 'teacher_name'
         ]
         widgets = {
-            'subject_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'batch_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'batch_time': forms.TimeInput(attrs={'type': 'time'}),
-            'batch_day': forms.TextInput(attrs={'class': 'form-control'}), 
-            'start_date': forms.DateInput(attrs={'type': 'date'}),
-            'class_level': forms.TextInput(attrs={'class': 'form-control'}),
-            'class_mode': forms.TextInput(attrs={'class': 'form-control'}),
-            'teacher_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'subject_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject name'}),
+            'batch_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter batch name'}),
+            'batch_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
+            'batch_day': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter batch day (e.g., Monday)'}),
+            'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'class_level': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter class level'}),
+            'class_mode': forms.Select(attrs={'class': 'form-control'}),
+            'teacher_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter teacher name'}),
         }
 
 class TeacherForm(forms.ModelForm):

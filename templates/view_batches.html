@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}View Batches{% endblock title %}
 
 {% block body %}
@@ -38,7 +39,7 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.subject_name }}</a></td>
-                    <td>{{ batch.batch_name }}</td>
+                    <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.batch_name }}</a></td>
                     <td>{{ batch.class_level }}</td>
                     <td>{{ batch.batch_day }}</td>
                     <td>{{ batch.batch_time }}</td>
@@ -75,7 +76,7 @@
     
 </div>
 
-<script>
+{% comment %} <script>
     document.getElementById('toggleEdit').addEventListener('click', function () {
         document.querySelectorAll('.edit-column').forEach(column => column.classList.toggle('d-none'));
     });
@@ -83,5 +84,10 @@
     document.getElementById('toggleDelete').addEventListener('click', function () {
         document.querySelectorAll('.delete-column').forEach(column => column.classList.toggle('d-none'));
     });
-</script>
+</script> {% endcomment %}
+
 {% endblock body %}
+
+{% block script %}
+    <script src="{% static "js/view_batches.js" %}"></script>
+{% endblock script %}

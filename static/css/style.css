@@ -67,3 +67,14 @@
     color: white;
     font-weight: bold;
 }
+
+
+
+
+
+
+.batch-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}

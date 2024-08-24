@@ -31,6 +31,7 @@ def index(request):
         'wbbse_students': wbbse_students,
         'icse_students': icse_students,
         'search': search_query,
+        'batch_form': BatchForm(),
     }
     return render(request, 'index.html', context)
 

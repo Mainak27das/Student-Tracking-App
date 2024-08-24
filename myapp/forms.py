@@ -17,20 +17,22 @@ class StudentForm(forms.ModelForm):
 class BatchForm(forms.ModelForm):
     class Meta:
         model = Batch
-        fields = [
-            'subject_name', 'batch_name', 'batch_time', 'batch_day',
-            'class_level', 'class_mode', 'start_date', 'teacher_name'
-        ]
+        # fields = [
+        #     'subject_name', 'batch_name', 'batch_time', 'batch_day',
+        #     'class_level', 'class_mode', 'start_date', 'teachers'
+        # ]
+        fields = ['subject_name', 'batch_name', 'batch_time', 'batch_day', 'start_date', 'class_level', 'class_mode', 'teachers']
         widgets = {
             'subject_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject name'}),
             'batch_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter batch name'}),
             'batch_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
-            'batch_day': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter batch day (e.g., Monday)'}),
+            'batch_day': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Select batch day'}),
             'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'class_level': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter class level'}),
+            'class_level': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Enter class level'}),
             'class_mode': forms.Select(attrs={'class': 'form-control'}),
-            'teacher_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter teacher name'}),
+            'teachers': forms.SelectMultiple(attrs={'class': 'form-control'}),
         }
+
 
 class TeacherForm(forms.ModelForm):
     class Meta:

@@ -26,7 +26,7 @@ class BatchForm(forms.ModelForm):
             'subject_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject name'}),
             'batch_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter batch name'}),
             'batch_time': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control'}),
-            'batch_day': forms.SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Select batch day'}),
+            'batch_day': forms.CheckboxSelectMultiple(),
             'start_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'class_level': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Enter class level'}),
             'class_mode': forms.Select(attrs={'class': 'form-control'}),

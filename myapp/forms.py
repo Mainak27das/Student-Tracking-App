@@ -9,7 +9,7 @@ class StudentForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter phone number'}),
             'board': forms.Select(attrs={'class': 'form-control'}),  
-            'student_class': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
+            'student_class': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
             'payment': forms.Select(attrs={'class': 'form-control'}), 
             'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject'}),
         }

@@ -111,6 +111,7 @@ class BatchDetailView(DetailView):
             )
         else:
             context['remaining_students'] = Student.objects.exclude(id__in=self.object.students.all())
+        context['student_form'] = StudentForm()
         return context
 
 # Add Existing Students to a Batch
@@ -140,8 +141,14 @@ def add_new_student(request, pk):
             batch.students.add(new_student)
             messages.success(request, "New student added to the batch.")
             return redirect('batch_detail', pk=pk)
+        else:
+            # print(form.errors)
+            messages.error(request, "Error adding student. Please try again.")
+            return redirect('batch_detail', pk=pk)
+
     else:
         form = StudentForm()
+    return redirect('batch_detail', pk=pk)
     # return render(request, 'add_new_student.html', {'form': form})
 
 # Edit Batch Details

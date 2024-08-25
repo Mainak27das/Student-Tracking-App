@@ -24,6 +24,9 @@ urlpatterns = [
 
     path('edit_teacher/<int:teacher_id>/', edit_teacher, name='edit_teacher'),
     path('delete_teacher/<int:teacher_id>/', delete_teacher, name='delete_teacher'),
+	
+
+    path('add-payment/<int:student_id>', views.payment_record, name='payment_record'),
 ]
 
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student, Batch,Teacher
+from .models import Student, Batch,Teacher, Payment
 from .forms import StudentForm, BatchForm,TeacherForm
 from django.contrib import messages
 from django.views.generic import DetailView
@@ -39,9 +39,11 @@ def index(request):
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     batches = Batch.objects.filter(students=student)
+    payments = Payment.objects.filter(student=student)
     context = {
         'student': student,
         'batches': batches,
+        'payments': payments,
     }
     return render(request, 'student_profile.html', context)
 
@@ -251,3 +253,27 @@ def delete_teacher(request, teacher_id):
         messages.success(request, 'Teacher table Deleted successfully!')
         return redirect('add_teacher')
 
+
+
+def payment_record(request, student_id):
+    if request.method == "POST":
+        
+        student = get_object_or_404(Student, id=student_id)
+        amount = request.POST['payment']
+        payment_date = request.POST.get('payment_date')
+        payment_month = request.POST.getlist('payment_months')
+        payment_year = request.POST.get('payment_year')
+
+        payment = Payment.objects.create(
+            student=student,
+            amount=amount,
+            date=payment_date,
+            year=payment_year,
+            months=payment_month
+        )
+        payment.save()
+
+        messages.success(request, 'Payment recorded successfully!')
+
+
+    return redirect("student_profile", student_id=student_id)

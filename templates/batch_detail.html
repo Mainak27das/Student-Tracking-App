@@ -2,7 +2,7 @@
 {% block title %}Batch Details{% endblock title %}
 {% load static %}
 {% block style %}
-
+    <link rel="stylesheet" href="{% static "css/batch_details.css" %}">
 {% endblock style %}
 
 {% block body %}
@@ -116,7 +116,7 @@
             <form method="post" action="{% url 'add_existing_students' batch.id %}">
                 {% csrf_token %}
                 <div class="table-container" style="max-height: 250px; overflow-y: auto;">
-                    <table class="table table-striped">
+                    <table class="table table-striped z-n1">
                         <thead class="table-dark sticky-top">
                             <tr>
                                 <th scope="col">Slno.</th>
@@ -169,44 +169,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: #6c757d;"></button>
             </div>
             <div class="modal-body" style="background-color: #f8f9fa;">
-                <form method="post" action="{% url 'add_new_student' batch.id %}">
+                <form method="post" action="{% url 'add_new_student' batch.id %}" >
                     {% csrf_token %}
-                    <div class="row row-cols-1 row-cols-md-2 g-3">
-                        <div class="col mb-3">
-                            <label for="studentName" class="form-label fw-bold">Student Name:</label>
-                            <input type="text" id="studentName" name="name" class="form-control" required>
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentPhone" class="form-label fw-bold">Phone Number:</label>
-                            <input type="text" id="studentPhone" name="phone_number" class="form-control">
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentBoard" class="form-label fw-bold">Board:</label>
-                            <select id="studentBoard" name="board" class="form-select">
-                                <option value="CBSE">CBSE</option>
-                                <option value="WBBSE">WBBSE</option>
-                                <option value="ICSE">ICSE</option>
-                            </select>
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentClass" class="form-label fw-bold">Class:</label>
-                            <input type="text" id="studentClass" name="student_class" class="form-control">
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentPayment" class="form-label fw-bold">Payment Status:</label>
-                            <select id="studentPayment" name="payment" class="form-select">
-                                <option value="DONE">DONE</option>
-                                <option value="NOT DONE">NOT DONE</option>
-                            </select>
-                        </div>
-                        <div class="col mb-3">
-                            <label for="studentSubject" class="form-label fw-bold">Subject:</label>
-                            <input type="text" id="studentSubject" name="subject" class="form-control" value="{{ batch.subject_name }}" readonly>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-dark btn-lg">Add Student</button>
-                        </div>
+                    <div class="add_student_form">
+                        {{ student_form.as_p }}
                     </div>
+                    <button type="submit" class="btn btn-primary">Add Student</button>
                 </form>
             </div>
         </div>

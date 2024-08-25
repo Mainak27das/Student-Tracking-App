@@ -5,9 +5,9 @@ from multiselectfield import MultiSelectField
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
-    phone_number = models.CharField(max_length=15, default='N/A')
+    phone_number = models.CharField(max_length=15, blank=True)
     board = models.CharField(max_length=50, choices=[('CBSE', 'CBSE'), ('WBBSE', 'WBBSE'), ('ICSE', 'ICSE')])
-    student_class = models.CharField(max_length=10)
+    student_class = models.IntegerField(choices=[(1,1),(2,2),(3,3),(4,4),(5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
     payment = models.CharField(max_length=50, choices=[('DONE', 'DONE'), ('NOT DONE', 'NOT DONE')], default='NOT DONE')
     subject = models.CharField(max_length=100, default='All')
 

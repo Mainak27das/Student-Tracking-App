@@ -44,7 +44,19 @@
                     <td>{{ batch.batch_day }}</td>
                     <td>{{ batch.batch_time }}</td>
                     <td>{{ batch.start_date }}</td>
-                    <td>{{ batch.teacher_name }}</td>
+                    <td>
+                        <p>
+                            {% for teacher in batch.teachers.all %}
+                                <a href="#" class="text-decoration-none">{{ teacher.name }}</a>
+                                {% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                No teacher assigned.
+                            {% endfor %}
+                        </p>
+                        {% for teacher in batch.teachers.all %}
+
+                        {% endfor %}
+                    </td>
                     <td class="edit-column d-none">
                         <a href="{% url 'edit_batch' batch.id %}" class="btn btn-warning" aria-label="Edit batch">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

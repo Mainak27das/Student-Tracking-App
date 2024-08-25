@@ -18,9 +18,9 @@
     </div>
 
     
-    <div class="table-responsive">
+    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
         <table class="table table-striped text-wrap text-center mb-0">
-            <thead class="table-dark">
+            <thead class="table-dark sticky-top">
                 <tr>
                     <th scope="col">Sl no.</th>
                     <th scope="col">Subject Name</th>
@@ -47,7 +47,7 @@
                     <td>
                         <p>
                             {% for teacher in batch.teachers.all %}
-                                <a href="#" class="text-decoration-none">{{ teacher.name }}</a>
+                                <a href="{% url 'add_teacher' %}" class="text-decoration-none">{{ teacher.name }}</a>
                                 {% if not forloop.last %}, {% endif %}
                             {% empty %}
                                 No teacher assigned.

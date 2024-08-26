@@ -23,6 +23,7 @@ class Payment(models.Model):
 
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='payments')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_method= models.CharField(max_length=100, choices=[('CASH', 'CASH'), ('UPI', 'UPI'), ('CARD', 'CARD')], default='CASH')
     date = models.DateField(default=timezone.now)
     year = models.IntegerField()
     months = MultiSelectField(choices=MONTH_CHOICES, default=[1])

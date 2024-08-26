@@ -4,6 +4,8 @@ from .forms import StudentForm, BatchForm,TeacherForm
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.db.models import Q
+from django.utils.dateparse import parse_date
+from django.db import models
 
 # Home Page with Student List and Search
 def index(request):
@@ -260,6 +262,7 @@ def payment_record(request, student_id):
         
         student = get_object_or_404(Student, id=student_id)
         amount = request.POST['payment']
+        payment_method = request.POST.get('payment_method')
         payment_date = request.POST.get('payment_date')
         payment_month = request.POST.getlist('payment_months')
         payment_year = request.POST.get('payment_year')
@@ -267,6 +270,7 @@ def payment_record(request, student_id):
         payment = Payment.objects.create(
             student=student,
             amount=amount,
+            payment_method=payment_method,
             date=payment_date,
             year=payment_year,
             months=payment_month
@@ -274,6 +278,20 @@ def payment_record(request, student_id):
         payment.save()
 
         messages.success(request, 'Payment recorded successfully!')
-
-
     return redirect("student_profile", student_id=student_id)
+
+def all_payment(request):
+    context = {}
+    payments = Payment.objects.all().order_by('-date')
+
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    if start_date and end_date:
+        start_date = parse_date(start_date)
+        end_date = parse_date(end_date)
+        payments = payments.filter(date__range=[start_date, end_date])
+        total_amount = payments.aggregate(total_amount=models.Sum('amount'))['total_amount']
+        context['total_amount'] = total_amount
+    
+    context['payments'] = payments
+    return render(request, 'all_payments.html', context)

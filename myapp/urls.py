@@ -7,6 +7,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     # path('edit/<int:student_id>/', views.edit_student, name='edit_student'),  # Uncomment if needed
     path('student/<int:student_id>/', views.student_profile, name='student_profile'),
+	path('filter-student/', views.filter_students, name='filter_student'),
     path('create-batch/', create_batch, name='create_batch'),
     path('view-batches/', view_batches, name='view_batches'),
     path('batch/<int:pk>/', BatchDetailView.as_view(), name='batch_detail'),

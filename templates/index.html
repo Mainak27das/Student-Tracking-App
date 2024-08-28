@@ -105,11 +105,38 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title">Student Data</h5>
-                <form method="GET" action="{% url 'index' %}" class="d-inline-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                        name="search" value="{{ search }}">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="search">
+                    <form method="GET" action="{% url 'index' %}" class="d-inline-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                            name="search" value="{{ search }}">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <form action="{% url "filter_student" %}" method="GET" class='d-flex gap-1 mt-1'>
+                        <select class="form-select" name="Board" title="board_select">
+                            <option value="" {% if board_filter == '' %}selected{% endif %}>Filter by Board</option>
+                            <option value="CBSE" {% if board_filter == 'CBSE' %}selected{% endif %}>CBSE</option>
+                            <option value="WBBSE" {% if board_filter == 'WBBSE' %}selected{% endif %}>WBBSE</option>
+                            <option value="ICSE" {% if board_filter == 'ICSE' %}selected{% endif %}>ICSE</option>
+                        </select>
+                        <select class="form-select"  name="Class" id="" title="board_class">
+                            <option value="" {% if class_filter == '' %}selected{% endif %}>Filter by Class</option>
+                            <option value="1" {% if class_filter == '1' %}selected{% endif %}>1</option>
+                            <option value="2" {% if class_filter == '2' %}selected{% endif %}>2</option>
+                            <option value="3" {% if class_filter == '3' %}selected{% endif %}>3</option>
+                            <option value="4" {% if class_filter == '4' %}selected{% endif %}>4</option>
+                            <option value="5" {% if class_filter == '5' %}selected{% endif %}>5</option>
+                            <option value="6" {% if class_filter == '6' %}selected{% endif %}>6</option>
+                            <option value="7" {% if class_filter == '7' %}selected{% endif %}>7</option>
+                            <option value="8" {% if class_filter == '8' %}selected{% endif %}>8</option>
+                            <option value="9" {% if class_filter == '9' %}selected{% endif %}>9</option>
+                            <option value="10" {% if class_filter == '10' %}selected{% endif %}>10</option>
+                            <option value="11" {% if class_filter == '11' %}selected{% endif %}>11</option>
+                            <option value="12" {% if class_filter == '12' %}selected{% endif %}>12</option>
+                        </select>
+                        <input type="text" name="Subject" class="form-control" placeholder="Enter Subject" value={{subject}}>
+                        <button type="Submit" class="btn btn-outline-dark">Filter</button>
+                    </form>
+                </div>
             </div>
 
             <div class="table-responsive"style="max-height: 500px; overflow-y: auto;">
@@ -122,7 +149,6 @@
                             <th scope="col">Class</th>
                             <th scope="col">Subject</th>
                             <th scope="col">Phone no.</th>
-                            <th scope="col">Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,7 +162,6 @@
                             <td>{{ student.student_class }}</td>
                             <td>{{ student.subject }}</td>
                             <td>{{ student.phone_number }}</td>
-                            <td>{{ student.payment }}</td>
                         </tr>
                         {% empty %}
                         <tr>

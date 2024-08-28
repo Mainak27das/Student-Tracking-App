@@ -17,8 +17,7 @@ def index(request):
             Q(name__icontains=search_query) |
             Q(phone_number__icontains=search_query) |
             Q(board__icontains=search_query) |
-            Q(student_class__icontains=search_query) |
-            Q(payment__icontains=search_query)
+            Q(student_class__icontains=search_query)
         )
 
     total_students = students.count()
@@ -37,11 +36,53 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def filter_students(request):
+    print(request.GET)
+    if request.GET.get("Board") or request.GET.get("Class") or request.GET.get("Subject"):
+        filters = {}
+    
+        board = request.GET.get("Board")
+        student_class = request.GET.get("Class")
+        subject = request.GET.get("Subject")
+        
+        if board:
+            filters['board'] = board
+        if student_class:
+            filters['student_class'] = int(student_class)
+        if subject:
+            filters['subject'] = subject
+        
+        students = Student.objects.filter(**filters)
+        # print("Students:", students)
+        context = {
+            'students': students,
+            'total_students': students.count(),
+            'cbse_students': students.filter(board='CBSE').count(),
+            'wbbse_students': students.filter(board='WBBSE').count(),
+            'icse_students': students.filter(board='ICSE').count(),
+            'search': request.GET.get('search', ''),
+            'board_filter': board,
+            'class_filter': student_class,
+            'subject': subject,
+            'batch_form': BatchForm(),
+        }
+    else:
+        context = {
+            'students': Student.objects.all(),
+            'total_students': Student.objects.count(),
+            'cbse_students': Student.objects.filter(board='CBSE').count(),
+            'wbbse_students': Student.objects.filter(board='WBBSE').count(),
+            'icse_students': Student.objects.filter(board='ICSE').count(),
+            'search': request.GET.get('search', ''),
+            'batch_form': BatchForm(),
+        }
+    return render(request, 'index.html', context)
+        
 # Student Profile Page
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     batches = Batch.objects.filter(students=student)
-    payments = Payment.objects.filter(student=student)
+    payments = Payment.objects.filter(student=student).order_by('date')
     context = {
         'student': student,
         'batches': batches,

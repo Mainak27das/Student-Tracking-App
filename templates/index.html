@@ -163,7 +163,7 @@
                             <td>{{ student.student_class }}</td>
                             <td>{{ student.subject }}</td>
                             <td>{{ student.phone_number }}</td>
-                            <td class="{% if student.total_due > 0 %} text-danger fw-semibold{% endif %}">{{ student.total_due.due }}</td>
+                            <td class="{% if student.total_due > 0 %} text-danger fw-semibold{% endif %}">{{ student.total_due }}</td>
                         </tr>
                         {% empty %}
                         <tr>
@@ -233,9 +233,6 @@
             </div>
         </div>
     </div>
-    
-    
-
 </div>
 
 

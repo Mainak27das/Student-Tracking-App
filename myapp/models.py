@@ -44,16 +44,17 @@ class Payment(models.Model):
     date = models.DateField(default=timezone.now)
     year = models.IntegerField()
     months = MultiSelectField(choices=MONTH_CHOICES, default=[1])
+    modification  = models.CharField(blank=True, null=True, default="", max_length=50)
 
     def __str__(self):
         return f"{self.student.name} - {self.amount} - {self.year} - {self.months}"
     
-class TotalDue(models.Model):
-    student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='total_due')
-    due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+# class TotalDue(models.Model):
+#     student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='total_due')
+#     due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
-    def __str__(self):
-        return f"{self.student.name} - {self.due}"
+#     def __str__(self):
+#         return f"{self.student.name} - {self.due}"
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100)

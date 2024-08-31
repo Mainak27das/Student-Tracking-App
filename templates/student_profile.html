@@ -42,8 +42,8 @@
                                     <th scope="col">Payment Method</th>
                                     <th scope="col">Payment Date</th>
                                     <th scope="col">Payment of Months</th>
+                                    <th scope="col">Modification</th>
                                     <th scope="col">Action</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,6 +54,7 @@
                                         <td>{{ payment.payment_method }}</td>
                                         <td>{{ payment.date }}</td>
                                         <td><strong>{{payment.year}}: </strong> {{ payment.months }}</td>
+                                        <td>{% if payment.modification %}{{payment.modification}}{% endif %}</td>
                                         <td>
                                             <a href="{% url "update_payment" payment.id student.id %}" class="btn btn-primary btn-sm me-2">Edit</a>
                                             <a href="{% url "clear_due" payment.id student.id  %}" class="btn btn-primary btn-sm me-2">Clear Due</a>
@@ -111,10 +112,6 @@
             <div class="mb-3">
                 <label for="payment" class="form-label">Payment Amount</label>
                 <input type="number" class="form-control" id="payment" name="payment" required>
-            </div>
-            <div class="mb-3">
-                <label for="due_payment" class="form-label">Due Amount</label>
-                <input type="number" class="form-control" id="due_payment" name="due_payment" required>
             </div>
 
             <div class="mb-3">

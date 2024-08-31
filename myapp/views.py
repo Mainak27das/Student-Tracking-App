@@ -6,6 +6,7 @@ from django.views.generic import DetailView
 from django.db.models import Q
 from django.utils.dateparse import parse_date
 from django.db import models
+from decimal import Decimal
 
 # Home Page with Student List and Search
 def index(request):
@@ -50,7 +51,7 @@ def filter_students(request):
         if student_class:
             filters['student_class'] = int(student_class)
         if subject:
-            filters['subject'] = subject
+            filters['subject__icontains'] = subject
         
         students = Student.objects.filter(**filters)
         # print("Students:", students)
@@ -82,7 +83,7 @@ def filter_students(request):
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     batches = Batch.objects.filter(students=student)
-    payments = Payment.objects.filter(student=student).order_by('date')
+    payments = Payment.objects.filter(student=student).order_by('-date')
     context = {
         'student': student,
         'batches': batches,
@@ -297,17 +298,26 @@ def delete_teacher(request, teacher_id):
         return redirect('add_teacher')
 
 
+# def clear_previous_due(student_id, due_amount):
+#     student = get_object_or_404(Student, id=student_id)
+#     payments = Payment.objects.filter(student=student)
+
 
 def payment_record(request, student_id):
     if request.method == "POST":
         
         student = get_object_or_404(Student, id=student_id)
-        amount = request.POST['payment']
-        due_amount = request.POST['due_payment']
+        amount = Decimal(request.POST['payment'])
         payment_method = request.POST.get('payment_method')
         payment_date = request.POST.get('payment_date')
         payment_month = request.POST.getlist('payment_months')
         payment_year = request.POST.get('payment_year')
+
+        student_fees = Decimal(student.fees)
+        due_amount = (student_fees * len(payment_month)) - amount
+
+        if due_amount < 0:
+            due_amount = 0
 
         payment = Payment.objects.create(
             student=student,
@@ -341,6 +351,10 @@ def all_payment(request):
 
 def clear_due(request, id, std_id):
     payment = get_object_or_404(Payment, id=id)
+    if payment.due_amount == 0:
+        messages.error(request, 'No due amount to clear!')
+        return redirect('student_profile', student_id=std_id)
+    payment.modification = f"Due Cleared {payment.due_amount}"
     payment.due_amount = 0
     payment.save()
     messages.success(request, 'Due amount cleared successfully!')
@@ -350,8 +364,16 @@ def edit_payment(request, id, std_id):
     payment = get_object_or_404(Payment, id=id)
     if request.method == 'POST':
         form = PaymentForm(request.POST, instance=payment)
+        prev_due = payment.due_amount
         if form.is_valid():
             form.save()
+
+            if prev_due !=payment.due_amount:
+                payment.modification= f"Due Modified {prev_due} -> {payment.due_amount}"
+                payment.save() 
+            else:
+                print("due not modified")
+
             messages.success(request, 'Payment details updated successfully!')
             return redirect('student_profile', student_id=std_id)
     else:

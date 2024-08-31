@@ -1,5 +1,5 @@
 from django.contrib import admin
-from myapp.models import Student,Batch,Teacher, Payment, Parent, TotalDue
+from myapp.models import Student,Batch,Teacher, Payment, Parent
 from myapp.forms import BatchForm
 
 
@@ -27,17 +27,17 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-	list_display = ['student', 'amount', 'due_amount', 'date', 'year', 'months']
+	list_display = ['student', 'amount', 'due_amount', 'date', 'year', 'months', 'modification']
 	search_fields = ['student', 'amount', 'date']
 	list_filter = ['student', 'amount', 'date']
 	list_per_page = 10
 
-@admin.register(TotalDue)
-class TotalDueAdmin(admin.ModelAdmin):
-	list_display = ['student', 'due']
-	search_fields = ['student', 'due']
-	list_filter = ['student', 'due']
-	list_per_page = 10
+# @admin.register(TotalDue)
+# class TotalDueAdmin(admin.ModelAdmin):
+# 	list_display = ['student', 'due']
+# 	search_fields = ['student', 'due']
+# 	list_filter = ['student', 'due']
+# 	list_per_page = 10
 
 @admin.register(Parent)
 class ParentAdmin(admin.ModelAdmin):

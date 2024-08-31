@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Edit Payment{% endblock title %}
+
+{% block body %}
+	<div class="container">
+		<form action="" method="post">{% csrf_token %}
+			{{form.as_p}}
+			<button type="submit" class="btn btn-primary">Update Payment</button>	
+		</form>
+	</div>
+{% endblock body %}

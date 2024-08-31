@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import timedelta
 from django.utils import timezone
 from multiselectfield import MultiSelectField
 
@@ -8,11 +7,28 @@ class Student(models.Model):
     phone_number = models.CharField(max_length=15, blank=True)
     board = models.CharField(max_length=50, choices=[('CBSE', 'CBSE'), ('WBBSE', 'WBBSE'), ('ICSE', 'ICSE')])
     student_class = models.IntegerField(choices=[(1,1),(2,2),(3,3),(4,4),(5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
-    # payment = models.CharField(max_length=50, choices=[('DONE', 'DONE'), ('NOT DONE', 'NOT DONE')], default='NOT DONE')
     subject = models.CharField(max_length=100, default='All')
+    addmission_date = models.DateField(default=timezone.now)
+    fees = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return self.name
+    
+    @property
+    def total_due(self):
+        payments = self.payments.all()
+        total_due = sum(payment.due_amount for payment in payments)
+        return total_due
+
+class Parent(models.Model):
+    father_name = models.CharField(max_length=100)
+    mother_name = models.CharField(max_length=100)
+    father_phone_number = models.CharField(max_length=15, blank=True)
+    mother_phone_number = models.CharField(max_length=15, blank=True)
+    child = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='parents', default=None)
+
+    def __str__(self):
+        return f"{self.father_name} - {self.mother_name} - {self.child.name}"
 
 class Payment(models.Model):
     MONTH_CHOICES = [
@@ -23,14 +39,22 @@ class Payment(models.Model):
 
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='payments')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
+    due_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     payment_method= models.CharField(max_length=100, choices=[('CASH', 'CASH'), ('UPI', 'UPI'), ('CARD', 'CARD')], default='CASH')
     date = models.DateField(default=timezone.now)
     year = models.IntegerField()
     months = MultiSelectField(choices=MONTH_CHOICES, default=[1])
+    modification  = models.CharField(blank=True, null=True, default="", max_length=50)
 
     def __str__(self):
         return f"{self.student.name} - {self.amount} - {self.year} - {self.months}"
     
+# class TotalDue(models.Model):
+#     student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='total_due')
+#     due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    
+#     def __str__(self):
+#         return f"{self.student.name} - {self.due}"
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
@@ -52,7 +76,7 @@ class Batch(models.Model):
         ('SUN', 'Sunday'),
     ]
     subject_name = models.CharField(max_length=100)
-    batch_name = models.CharField(max_length=100,default="")
+    batch_name = models.CharField(max_length=100, default="")
     batch_time = models.TimeField()
     batch_day = MultiSelectField(choices=DAYS)
     class_level = models.IntegerField(choices=[(1,1),(2,2),(3,3),(4,4),(5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])

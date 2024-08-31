@@ -14,6 +14,8 @@
                     <h2 class="mb-3">{{ student.name }}</h2>
                     <p class="text-muted">{{ student.get_board_display }} | Class: {{ student.student_class }}</p>
                     <p><strong>Phone Number:</strong> {{ student.phone_number }}</p>
+                    <p><strong>Fees:</strong> {{ student.fees }}</p>
+
                     <button class="btn btn-dark" id="payment-record-dailog">Record Payment</button>
                 </div>
 
@@ -36,9 +38,11 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">Amount</th>
+                                    <th scope="col">Due</th>
                                     <th scope="col">Payment Method</th>
                                     <th scope="col">Payment Date</th>
                                     <th scope="col">Payment of Months</th>
+                                    <th scope="col">Action</th>
 
                                 </tr>
                             </thead>
@@ -46,9 +50,13 @@
                                 {% for payment in payments %}
                                     <tr>
                                         <td>{{ payment.amount }}</td>
+                                        <td class="{% if payment.due_amount > 0 %} text-danger {% endif %}">{{ payment.due_amount }}</td>
                                         <td>{{ payment.payment_method }}</td>
                                         <td>{{ payment.date }}</td>
                                         <td><strong>{{payment.year}}: </strong> {{ payment.months }}</td>
+                                        <td>
+                                            <a href="{% url "update_payment" payment.id student.id %}" class="btn btn-primary btn-sm me-2">Edit</a>
+                                            <a href="{% url "clear_due" payment.id student.id  %}" class="btn btn-primary btn-sm me-2">Clear Due</a>
                                     </tr>
                                 {% endfor %}
                             </tbody>
@@ -103,6 +111,10 @@
             <div class="mb-3">
                 <label for="payment" class="form-label">Payment Amount</label>
                 <input type="number" class="form-control" id="payment" name="payment" required>
+            </div>
+            <div class="mb-3">
+                <label for="due_payment" class="form-label">Due Amount</label>
+                <input type="number" class="form-control" id="due_payment" name="due_payment" required>
             </div>
 
             <div class="mb-3">

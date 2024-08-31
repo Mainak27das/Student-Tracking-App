@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student, Batch,Teacher, Payment
-from .forms import StudentForm, BatchForm,TeacherForm
+from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.db.models import Q
@@ -303,6 +303,7 @@ def payment_record(request, student_id):
         
         student = get_object_or_404(Student, id=student_id)
         amount = request.POST['payment']
+        due_amount = request.POST['due_payment']
         payment_method = request.POST.get('payment_method')
         payment_date = request.POST.get('payment_date')
         payment_month = request.POST.getlist('payment_months')
@@ -311,6 +312,7 @@ def payment_record(request, student_id):
         payment = Payment.objects.create(
             student=student,
             amount=amount,
+            due_amount = due_amount,
             payment_method=payment_method,
             date=payment_date,
             year=payment_year,
@@ -336,3 +338,22 @@ def all_payment(request):
     
     context['payments'] = payments
     return render(request, 'all_payments.html', context)
+
+def clear_due(request, id, std_id):
+    payment = get_object_or_404(Payment, id=id)
+    payment.due_amount = 0
+    payment.save()
+    messages.success(request, 'Due amount cleared successfully!')
+    return redirect('student_profile', student_id=std_id)
+
+def edit_payment(request, id, std_id):
+    payment = get_object_or_404(Payment, id=id)
+    if request.method == 'POST':
+        form = PaymentForm(request.POST, instance=payment)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Payment details updated successfully!')
+            return redirect('student_profile', student_id=std_id)
+    else:
+        form = PaymentForm(instance=payment)
+    return render(request, 'edit_payment.html', {'form': form})

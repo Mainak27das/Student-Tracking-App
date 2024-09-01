@@ -49,12 +49,6 @@ class Payment(models.Model):
     def __str__(self):
         return f"{self.student.name} - {self.amount} - {self.year} - {self.months}"
     
-# class TotalDue(models.Model):
-#     student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='total_due')
-#     due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    
-#     def __str__(self):
-#         return f"{self.student.name} - {self.due}"
 
 class Teacher(models.Model):
     name = models.CharField(max_length=100)
@@ -77,7 +71,7 @@ class Batch(models.Model):
     ]
     subject_name = models.CharField(max_length=100)
     batch_name = models.CharField(max_length=100, default="")
-    batch_time = models.TimeField()
+    batch_times = models.JSONField(default=dict)  # Store time for each day as a JSON object
     batch_day = MultiSelectField(choices=DAYS)
     class_level = models.IntegerField(choices=[(1,1),(2,2),(3,3),(4,4),(5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
     class_mode = models.CharField(max_length=100, choices=[('ONLINE', 'ONLINE'), ('OFFLINE', 'OFFLINE')], default='ONLINE')  
@@ -86,6 +80,9 @@ class Batch(models.Model):
     students = models.ManyToManyField(Student, related_name='students', blank=True)
 
     def __str__(self):
-        return f"{self.subject_name} - {self.batch_day} at {self.batch_time}"
+        return f"{self.subject_name} - {self.batch_day}"
+
+    def get_batch_time(self, day):
+        return self.batch_times.get(day, "Not scheduled")
 
 

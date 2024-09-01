@@ -97,6 +97,7 @@ def create_batch(request):
         form = BatchForm(request.POST)
         print(request.method)
         if form.is_valid():
+            print(form.cleaned_data)
             form.save()
             messages.success(request, "Batch created successfully!")
             return redirect('view_batches')

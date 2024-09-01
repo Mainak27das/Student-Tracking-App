@@ -2,6 +2,11 @@
 {% block title %}Dashboard{% endblock title %}
 {% load static %}
 {% block style %}
+<style>
+    .time-field {
+        display: none;
+    }
+</style>
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock style %}
 
@@ -190,7 +195,7 @@
                 <div class="modal-body bg-light">
                     <form action="{% url 'create_batch' %}" method="post">
                         {% csrf_token %}
-                        <div class="row g-3">
+                        {% comment %} <div class="row g-3">
                             <div class="col-md-6">
                                 <label for="id_subject_name" class="form-label fw-medium">Subject Name</label>
                                 {{ batch_form.subject_name }}
@@ -202,10 +207,6 @@
                             <div class="col-md-6">
                                 <label for="id_class_level" class="form-label fw-medium">Class</label>
                                 {{ batch_form.class_level }}
-                            </div>
-                            <div class="col-md-6">
-                                <label for="id_batch_time" class="form-label fw-medium">Batch Time</label>
-                                {{ batch_form.batch_time }}
                             </div>
                             <div class="col-md-6">
                                 <label for="id_class_mode" class="form-label fw-medium">Class Mode</label>
@@ -223,8 +224,9 @@
                                 <label for="id_teachers" class="form-label fw-medium">Teachers</label>
                                 {{ batch_form.teachers }}
                             </div>
-                        </div>
-
+                            {{batch_form.MON}}
+                        </div> {% endcomment %}
+                        {{ batch_form.as_p }}
                         <div class="d-grid mt-4">
                             <button type="submit" class="btn btn-dark btn-lg">Create Batch</button>
                         </div>
@@ -239,6 +241,38 @@
 
 
 {% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const batchDayCheckboxes = document.querySelectorAll('#id_batch_day input[type="checkbox"]');
+        console.log(batchDayCheckboxes);
+        const timeFields = {
+            'MON': document.querySelector('[name="MON"]').closest('p'),
+            'TUE': document.querySelector('[name="TUE"]').closest('p'),
+            'WED': document.querySelector('[name="WED"]').closest('p'),
+            'THU': document.querySelector('[name="THU"]').closest('p'),
+            'FRI': document.querySelector('[name="FRI"]').closest('p'),
+            'SAT': document.querySelector('[name="SAT"]').closest('p'),
+            'SUN': document.querySelector('[name="SUN"]').closest('p'),
+        };
+
+        function toggleTimeFields() {
+            batchDayCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    timeFields[checkbox.value].style.display = 'block';
+                } else {
+                    timeFields[checkbox.value].style.display = 'none';
+                }
+            });
+        }
+
+        batchDayCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', toggleTimeFields);
+        });
+
+        // Initial toggle to set the correct visibility on page load
+        toggleTimeFields();
+    });
+</script>
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 {% endblock script %}
 

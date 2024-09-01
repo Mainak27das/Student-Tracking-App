@@ -12,9 +12,9 @@ class StudentAdmin(admin.ModelAdmin):
 
 @admin.register(Batch)
 class BatchAdmin(admin.ModelAdmin):
-	list_display = ['id','subject_name', 'batch_name', 'batch_time', 'batch_day', 'class_level', 'class_mode', 'start_date']
-	search_fields = ['subject_name', 'batch_name', 'batch_time', 'batch_day', 'class_level', 'class_mode', 'start_date']
-	list_filter = ['subject_name', 'batch_name', 'batch_time', 'batch_day', 'class_level', 'class_mode', 'start_date']
+	list_display = ['id','subject_name', 'batch_name', 'batch_times', 'batch_day', 'class_level', 'class_mode', 'start_date']
+	search_fields = ['subject_name', 'batch_name', 'batch_times', 'batch_day', 'class_level', 'class_mode', 'start_date']
+	list_filter = ['subject_name', 'batch_name', 'batch_times', 'batch_day', 'class_level', 'class_mode', 'start_date']
 	list_per_page = 10
 	# form = BatchForm
 

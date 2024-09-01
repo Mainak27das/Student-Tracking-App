@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student,Batch,Teacher, Payment
+from .models import Student,Batch,Teacher, Payment, Parent
 from datetime import datetime
 from django_json_widget.widgets import JSONEditorWidget
 
@@ -87,4 +87,17 @@ class PaymentForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'year': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter year'}),
             'months': forms.CheckboxSelectMultiple(),
+        }
+
+
+class ParentForm(forms.ModelForm):
+    class Meta:
+        model = Parent
+        fields = ['father_name', 'mother_name', 'father_phone_number', 'mother_phone_number']
+        widgets = {
+            'father_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter father name'}),
+            'mother_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter mother name'}),
+            'father_phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter father phone number'}),
+            'mother_phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter mother phone number'}),
+            'child': forms.Select(attrs={'class': 'form-control'}),
         }

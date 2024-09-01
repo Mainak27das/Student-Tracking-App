@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student, Batch,Teacher, Payment
-from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm
+from .models import Student, Batch,Teacher, Payment, Parent
+from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm, ParentForm
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.db.models import Q
@@ -89,6 +89,13 @@ def student_profile(request, student_id):
         'batches': batches,
         'payments': payments,
     }
+    parent=Parent.objects.filter(child=student)
+    if parent:
+        context['parent']=parent[0]
+    else:
+        context['parent']=parent
+        
+
     return render(request, 'student_profile.html', context)
 
 # Create a New Batch
@@ -380,3 +387,34 @@ def edit_payment(request, id, std_id):
     else:
         form = PaymentForm(instance=payment)
     return render(request, 'edit_payment.html', {'form': form})
+
+def add_parent(request, std_id):
+    student = get_object_or_404(Student, id=std_id)
+    context = {}
+    if request.method == 'POST':
+        form = ParentForm(request.POST)
+        if form.is_valid():
+            parent = form.save(commit=False)
+            parent.child = student
+            parent.save()
+            messages.success(request, 'Parent details added successfully!')
+            return redirect('student_profile', student_id=std_id)
+    context['form'] = ParentForm()
+    return render(request, 'add_parent.html', context)
+
+def edit_parent(request, id, std_id):
+    parent = get_object_or_404(Parent, id=id)
+    student = get_object_or_404(Student, id=std_id)
+    context ={}
+    if request.method == "POST":
+        form = ParentForm(request.POST, instance=parent)  # Ensure the form is bound to the existing parent instance
+        if form.is_valid():
+            parent = form.save(commit=False)
+            parent.child = student
+            parent.save()
+            messages.success(request, 'Parent details updated successfully!')
+            return redirect('student_profile', student_id=std_id)
+    else:
+        form = ParentForm(instance=parent) 
+    context ['form']= form
+    return render(request, 'add_parent.html', context)

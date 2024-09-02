@@ -350,16 +350,31 @@ def all_payment(request):
     context = {}
     payments = Payment.objects.all().order_by('-date')
 
+    # Date range filter
     start_date = request.GET.get('start_date')
     end_date = request.GET.get('end_date')
     if start_date and end_date:
         start_date = parse_date(start_date)
         end_date = parse_date(end_date)
         payments = payments.filter(date__range=[start_date, end_date])
-        total_amount = payments.aggregate(total_amount=models.Sum('amount'))['total_amount']
-        context['total_amount'] = total_amount
-    
+
+    # Search filter
+    search_query = request.GET.get('search', '')
+    if search_query:
+        payments = payments.filter(
+            Q(student__name__icontains=search_query) |
+            Q(student__board__icontains=search_query) |
+            Q(student__student_class__icontains=search_query) |
+            Q(student__subject__icontains=search_query) |
+            Q(payment_method__icontains=search_query)
+        )
+
+    # Calculate total amount if filtered payments exist
+    total_amount = payments.aggregate(total_amount=models.Sum('amount'))['total_amount']
+    context['total_amount'] = total_amount if total_amount else 0
+
     context['payments'] = payments
+    context['search'] = search_query  # Pass search query back to template to maintain the input
     return render(request, 'all_payments.html', context)
 
 def clear_due(request, id, std_id):

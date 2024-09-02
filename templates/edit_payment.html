@@ -4,10 +4,27 @@
 {% block title %}Edit Payment{% endblock title %}
 
 {% block body %}
-	<div class="container">
-		<form action="" method="post">{% csrf_token %}
-			{{form.as_p}}
-			<button type="submit" class="btn btn-primary">Update Payment</button>	
-		</form>
-	</div>
+<div class="container py-5">
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+            <h2 class="mb-4">Edit Payment</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <!-- Loop through each form field and apply Bootstrap styling -->
+                    {% for field in form %}
+                    <div class="col-md-6">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                        <div class="text-danger small">{{ field.errors|striptags }}</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="btn btn-primary mt-4">Update Payment</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock body %}

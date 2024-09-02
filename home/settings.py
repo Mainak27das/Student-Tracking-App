@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
 	'django.forms',
-    'django_json_widget',
 ]
 
 MIDDLEWARE = [

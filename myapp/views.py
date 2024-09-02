@@ -330,7 +330,7 @@ def payment_record(request, student_id):
         due_amount = (student_fees * len(payment_month)) - amount
 
         if due_amount < 0:
-            due_amount = 0
+            due_amount = due_amount
 
         payment = Payment.objects.create(
             student=student,

@@ -44,6 +44,8 @@
             {% comment %} Payment Record {% endcomment %}
             <div>
                 <h4 class="mb-3">Payment Records</h4>
+                <h4 class="mb-3">Total Due : </h4>
+                <span class="{% if student.total_due > 0 %} text-danger fw-semibold{% endif %}">{{ student.total_due }}</span>
                 {% if payments %}
                     <div class="table-responsive">
                         <table class="table table-striped">

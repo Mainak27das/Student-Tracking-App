@@ -41,8 +41,21 @@
                     <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.subject_name }}</a></td>
                     <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.batch_name }}</a></td>
                     <td>{{ batch.class_level }}</td>
-                    <td>{{ batch.batch_day }}</td>
-                    <td>{{ batch.batch_time }}</td>
+                    {% comment %} <td>{{ batch.batch_day }}</td> {% endcomment %}
+                    <td>
+                        <ul>
+                            {% for day in batch.batch_day %}
+                               <li> {{ day }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for key, value in batch.batch_times.items %}
+                                <li>{{key}} - {{value}}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
                     <td>{{ batch.start_date }}</td>
                     <td>
                         <p>

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body %}
+	<div class="container">
+		<h1>Add Parent Details</h1>
+		<form action="" method="post">{% csrf_token %}
+			{{form.as_p}}
+			<button type="submit" class = "btn btn-dark">Save</button>
+		</form>
+	</div>
+{% endblock body %}

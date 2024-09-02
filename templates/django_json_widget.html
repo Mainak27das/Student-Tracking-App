@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'django_json_widget/jsoneditor.min.css' %}">
+    <script src="{% static 'django_json_widget/jsoneditor.min.js' %}"></script>
+</head>
+<body>
+    <div id="{{ widget.attrs.id }}" class="jsoneditor" style="width: {{ widget.attrs.width }}; height: {{ widget.attrs.height }};"></div>
+    <textarea name="{{ widget.name }}" id="{{ widget.attrs.id }}_input" hidden>{{ widget.value|default_if_none:"{}" }}</textarea>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var container = document.getElementById("{{ widget.attrs.id }}");
+            var options = {{ widget.attrs.options|safe }};
+            var editor = new JSONEditor(container, options);
+            editor.set(JSON.parse(document.getElementById("{{ widget.attrs.id }}_input").value));
+            editor.on('change', function() {
+                document.getElementById("{{ widget.attrs.id }}_input").value = JSON.stringify(editor.get());
+            });
+        });
+    </script>
+</body>
+</html>

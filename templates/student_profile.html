@@ -17,6 +17,18 @@
                     <p><strong>Fees:</strong> {{ student.fees }}</p>
 
                     <button class="btn btn-dark" id="payment-record-dailog">Record Payment</button>
+                    <div class="parent-details">
+                        {% if parent %}
+                            <p class="fahter">Fahter: <strong>{{parent.father_name}}</strong></p>
+                            <p class="fahter">'Fahter's Ph. No.': <strong>{{parent.father_phone_number}}</strong></p>
+                            <p class="fahter">Mother: <strong>{{parent.mother_name}}</strong></p>
+                            <p class="fahter">'Mohter's Ph. No.': <strong>{{parent.mother_phone_number}}</strong></p>
+                            
+                            <a href="{% url "edit_parent" parent.id student.id %}" class="btn btn-dark" id="payment-record-dailog">Edit Parent Details</a>
+                        {% else %}
+                            <a href="{% url "add_parent" student.id %}" class="btn btn-dark" id="payment-record-dailog">Add Parent Details</a>
+                        {% endif %}
+                    </div>
                 </div>
 
                 <!-- Right Column: Actions -->

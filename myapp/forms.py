@@ -1,8 +1,6 @@
 from django import forms
 from .models import Student,Batch,Teacher, Payment, Parent
 from datetime import datetime
-from django_json_widget.widgets import JSONEditorWidget
-
 
 
 class StudentForm(forms.ModelForm):

@@ -124,8 +124,7 @@ def view_batches(request):
         batches = Batch.objects.filter(
             Q(subject_name__icontains=search_query) |
             Q(class_level__icontains=search_query) |
-            Q(batch_day__icontains=search_query) |
-            Q(teacher_name__icontains=search_query)
+            Q(batch_day__icontains=search_query) 
         )
     else:
         batches = Batch.objects.all()
@@ -142,14 +141,21 @@ class BatchDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.GET.get('search_batch_student'):
             search_query = self.request.GET.get('search_batch_student')
-            students = Student.objects.filter(
+            # students = Student.objects.filter(
+            #     Q(name__icontains=search_query) |
+            #     Q(phone_number__icontains=search_query) |
+            #     Q(board__icontains=search_query) |
+            #     Q(student_class__icontains=search_query) 
+            # )
+            # context['students'] = students.filter(batches=self.object)
+
+            students = Student.objects.filter(id__in=self.object.students.all()).filter(
                 Q(name__icontains=search_query) |
                 Q(phone_number__icontains=search_query) |
                 Q(board__icontains=search_query) |
-                Q(student_class__icontains=search_query) |
-                Q(payment__icontains=search_query)
+                Q(student_class__icontains=search_query) 
             )
-            context['students'] = students.filter(batches=self.object)
+            context['students'] = students
             
         else:
             context['students'] = self.object.students.all()
@@ -160,8 +166,7 @@ class BatchDetailView(DetailView):
                 Q(name__icontains=search_query) |
                 Q(phone_number__icontains=search_query) |
                 Q(board__icontains=search_query) |
-                Q(student_class__icontains=search_query) |
-                Q(payment__icontains=search_query)
+                Q(student_class__icontains=search_query) 
             )
         else:
             context['remaining_students'] = Student.objects.exclude(id__in=self.object.students.all())

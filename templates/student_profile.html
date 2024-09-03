@@ -15,7 +15,7 @@
                     <h2 class="mb-3">{{ student.name }}</h2>
                     <p class="text-muted">{{ student.get_board_display }} | Class: {{ student.student_class }}</p>
                     <p><strong>Phone Number:</strong> {{ student.phone_number }}</p>
-                    <p><strong>Fees:</strong> {{ student.fees }}</p>
+                    <p class="fs-5 text-primary"><strong>Fees:</strong> {{ student.fees }}</p>
 
                     <button class="btn btn-dark mb-3" id="payment-record-dailog">Record Payment</button>
 
@@ -45,13 +45,16 @@
 
             <!-- Payment Records Section -->
             <div class="mt-4">
-                <h4>Payment Records</h4>
-                <p class="mb-1"><strong>Total Due:</strong> 
-                    <span class="{% if student.total_due > 0 %} text-danger fw-semibold{% endif %}">{{ student.total_due }}</span>
-                </p>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Payment Records</h4>
+                    <p class="mb-0 fs-3"><strong>Total Due:</strong>
+                        <span class="{% if student.total_due > 0 %}text-danger fw-semibold{% endif %}">{{ student.total_due }}</span>
+                    </p>
+                </div>
+                
                 {% if payments %}
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped text-wrap text-center m-0">
                         <thead class="table-dark">
                             <tr>
                                 <th>Amount</th>
@@ -91,24 +94,44 @@
                 <h4>Enrolled Batches</h4>
                 {% if batches %}
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped text-wrap text-center m-0">
                         <thead class="table-dark">
                             <tr>
+                                <th>Slno.</th>
                                 <th>Batch Name</th>
                                 <th>Subject</th>
-                                <th>Time</th>
-                                <th>Day</th>
-                                <th>Payment</th>
+                                <th>Day / Time</th>
+                                <th>Start Date</th>
+                                <th>Teacher</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for batch in batches %}
                             <tr>
-                                <td>{{ batch.batch_name }}</td>
-                                <td>{{ batch.subject_name }}</td>
-                                <td>{{ batch.batch_time }}</td>
-                                <td>{{ batch.batch_day }}</td>
-                                <td>{{ student.payment }}</td>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.batch_name }}</a></td>
+                                <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.subject_name }}</a></td>
+                                <td>
+                                    <ul>
+                                        {% for key, value in batch.batch_times.items %}
+                                            <li>{{key}} - {{value}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                                <td>{{ batch.start_date }}</td>
+                                <td>
+                                    <p>
+                                        {% for teacher in batch.teachers.all %}
+                                            <a href="{% url 'add_teacher' %}" class="text-decoration-none">{{ teacher.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                            No teacher assigned.
+                                        {% endfor %}
+                                    </p>
+                                    {% for teacher in batch.teachers.all %}
+            
+                                    {% endfor %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

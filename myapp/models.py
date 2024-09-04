@@ -5,6 +5,7 @@ from multiselectfield import MultiSelectField
 class Student(models.Model):
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15, blank=True)
+    phone_number2 = models.CharField(max_length=15, blank=True)
     board = models.CharField(max_length=50, choices=[('CBSE', 'CBSE'), ('WBBSE', 'WBBSE'), ('ICSE', 'ICSE')])
     student_class = models.IntegerField(choices=[(1,1),(2,2),(3,3),(4,4),(5, 5), (6, 6), (7, 7), (8, 8), (9, 9), (10, 10), (11, 11), (12, 12)])
     subject = models.CharField(max_length=100, default='All')
@@ -42,12 +43,11 @@ class Payment(models.Model):
     due_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     payment_method= models.CharField(max_length=100, choices=[('CASH', 'CASH'), ('UPI', 'UPI'), ('CARD', 'CARD')], default='CASH')
     date = models.DateField(default=timezone.now)
-    year = models.IntegerField()
     months = MultiSelectField(choices=MONTH_CHOICES, default=[1])
     modification  = models.CharField(blank=True, null=True, default="", max_length=50)
 
     def __str__(self):
-        return f"{self.student.name} - {self.amount} - {self.year} - {self.months}"
+        return f"{self.student.name} - {self.amount} - {self.months}"
     
 
 class Teacher(models.Model):

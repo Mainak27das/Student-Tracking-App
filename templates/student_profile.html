@@ -14,7 +14,14 @@
                 <div class="col-md-7">
                     <h2 class="mb-3">{{ student.name }}</h2>
                     <p class="text-muted">{{ student.get_board_display }} | Class: {{ student.student_class }}</p>
-                    <p><strong>Phone Number:</strong> {{ student.phone_number }}</p>
+                    <p>
+                        <strong>Phone Number:</strong> 
+                        <a class="link-info link-offset-2 link-underline link-underline-opacity-0" href="tel:{{ student.phone_number }}">{{ student.phone_number }}</a>
+                    </p>
+                    <p>
+                        <strong>Alternate Phone Number:</strong> 
+                        <a class="link-info link-offset-2 link-underline link-underline-opacity-0" href="tel:{{ student.phone_number2 }}">{{ student.phone_number2 }}</a>
+                    </p>
                     <p class="fs-5 text-primary"><strong>Fees:</strong> {{ student.fees }}</p>
 
                     <button class="btn btn-dark mb-3" id="payment-record-dailog">Record Payment</button>
@@ -62,7 +69,7 @@
                                 <th>Payment Method</th>
                                 <th>Payment Date</th>
                                 <th>Payment of Months</th>
-                                <th>Modification</th>
+                                <th>Deu Modification</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -73,11 +80,16 @@
                                 <td class="{% if payment.due_amount > 0 %} text-danger {% endif %}">{{ payment.due_amount }}</td>
                                 <td>{{ payment.payment_method }}</td>
                                 <td>{{ payment.date }}</td>
-                                <td><strong>{{payment.year}}:</strong> {{ payment.months }}</td>
-                                <td>{% if payment.modification %}{{ payment.modification }}{% endif %}</td>
+                                <td>{{ payment.months }}</td>
+                                <td>
+                                    {% if payment.modification %}
+                                        {{ payment.modification }}
+                                    {% else %}
+                                        No modification
+                                    {% endif %}
+                                </td>
                                 <td>
                                     <a href="{% url 'update_payment' payment.id student.id %}" class="btn btn-primary btn-sm me-2">Edit</a>
-                                    <a href="{% url 'clear_due' payment.id student.id  %}" class="btn btn-success btn-sm me-2">Clear Due</a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -113,9 +125,11 @@
                                 <td><a href="{% url 'batch_detail' batch.id %}" class="text-decoration-none">{{ batch.subject_name }}</a></td>
                                 <td>
                                     <ul>
-                                        {% for key, value in batch.batch_times.items %}
-                                            <li>{{key}} - {{value}}</li>
-                                        {% endfor %}
+                                        <ul class="list-unstyled m-0">
+                                            {% for key, value in batch.batch_times.items %}
+                                            <li>{{ key }} - {{ value }}</li>
+                                            {% endfor %}
+                                        </ul>
                                     </ul>
                                 </td>
                                 <td>{{ batch.start_date }}</td>
@@ -166,10 +180,6 @@
             <div class="mb-3">
                 <label for="payment_date" class="form-label">Payment Date</label>
                 <input type="date" class="form-control" id="payment_date" name="payment_date" required>
-            </div>
-            <div class="mb-3">
-                <label for="payment_year" class="form-label">Payment of Year</label>
-                <input type="number" class="form-control" id="payment_year" name="payment_year" min="2000" max="2100" step="1" required>
             </div>
             <div class="mb-3">
                 <label for="payment_months" class="form-label">Payment of Months</label>

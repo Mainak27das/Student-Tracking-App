@@ -30,7 +30,6 @@ urlpatterns = [
     path('add-payment/<int:student_id>', views.payment_record, name='payment_record'),
 	path('all-payments/', views.all_payment, name='all_payments'),
 	
-    path('clear-due/<int:id>/<int:std_id>/', views.clear_due, name='clear_due'),
 	path('update-payment/<int:id>/<int:std_id>/', views.edit_payment, name='update_payment'),
 
     path('add-parent/<int:std_id>/',views.add_parent, name="add_parent"),

@@ -375,16 +375,7 @@ def all_payment(request):
     context['search'] = search_query  # Pass search query back to template to maintain the input
     return render(request, 'all_payments.html', context)
 
-def clear_due(request, id, std_id):
-    payment = get_object_or_404(Payment, id=id)
-    if payment.due_amount == 0:
-        messages.error(request, 'No due amount to clear!')
-        return redirect('student_profile', student_id=std_id)
-    payment.modification = f"Due Cleared {payment.due_amount}"
-    payment.due_amount = 0
-    payment.save()
-    messages.success(request, 'Due amount cleared successfully!')
-    return redirect('student_profile', student_id=std_id)
+
 
 def edit_payment(request, id, std_id):
     payment = get_object_or_404(Payment, id=id)

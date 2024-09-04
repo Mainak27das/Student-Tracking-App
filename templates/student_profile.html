@@ -62,7 +62,7 @@
                                 <th>Payment Method</th>
                                 <th>Payment Date</th>
                                 <th>Payment of Months</th>
-                                <th>Modification</th>
+                                <th>Deu Modification</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -74,10 +74,15 @@
                                 <td>{{ payment.payment_method }}</td>
                                 <td>{{ payment.date }}</td>
                                 <td>{{ payment.months }}</td>
-                                <td>{% if payment.modification %}{{ payment.modification }}{% endif %}</td>
+                                <td>
+                                    {% if payment.modification %}
+                                        {{ payment.modification }}
+                                    {% else %}
+                                        No modification
+                                    {% endif %}
+                                </td>
                                 <td>
                                     <a href="{% url 'update_payment' payment.id student.id %}" class="btn btn-primary btn-sm me-2">Edit</a>
-                                    <a href="{% url 'clear_due' payment.id student.id  %}" class="btn btn-success btn-sm me-2">Clear Due</a>
                                 </td>
                             </tr>
                             {% endfor %}

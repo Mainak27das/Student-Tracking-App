@@ -78,10 +78,11 @@ class TeacherForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = "__all__"
+        fields = ['amount', 'due_amount', 'payment_method', 'date', 'months']
         widgets = {
-            'student': forms.Select(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter amount'}),
+            'due_amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter due amount'}),
+            'payment_method': forms.Select(attrs={'class': 'form-control'}),
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'months': forms.CheckboxSelectMultiple(),
         }

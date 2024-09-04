@@ -73,7 +73,7 @@ All Payments
                             <td class="{% if payment.due_amount > 0 %} text-danger {% endif %}">{{ payment.due_amount }}</td>
                             <td>{{ payment.payment_method }}</td>
                             <td>{{ payment.date }}</td>
-                            <td><strong>{{ payment.year }}: </strong> {{ payment.months }}</td>
+                            <td>{{ payment.months }}</td>
                             <td>{{ payment.modification }}</td>
                         </tr>
                         {% empty %}

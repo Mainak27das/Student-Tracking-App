@@ -83,7 +83,6 @@ class PaymentForm(forms.ModelForm):
             'student': forms.Select(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter amount'}),
             'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'year': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter year'}),
             'months': forms.CheckboxSelectMultiple(),
         }
 

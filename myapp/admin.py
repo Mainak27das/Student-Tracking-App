@@ -27,7 +27,7 @@ class TeacherAdmin(admin.ModelAdmin):
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-	list_display = ['student', 'amount', 'due_amount', 'date', 'year', 'months', 'modification']
+	list_display = ['student', 'amount', 'due_amount', 'date', 'months', 'modification']
 	search_fields = ['student', 'amount', 'date']
 	list_filter = ['student', 'amount', 'date']
 	list_per_page = 10

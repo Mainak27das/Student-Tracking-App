@@ -73,7 +73,7 @@
                                 <td class="{% if payment.due_amount > 0 %} text-danger {% endif %}">{{ payment.due_amount }}</td>
                                 <td>{{ payment.payment_method }}</td>
                                 <td>{{ payment.date }}</td>
-                                <td><strong>{{payment.year}}:</strong> {{ payment.months }}</td>
+                                <td>{{ payment.months }}</td>
                                 <td>{% if payment.modification %}{{ payment.modification }}{% endif %}</td>
                                 <td>
                                     <a href="{% url 'update_payment' payment.id student.id %}" class="btn btn-primary btn-sm me-2">Edit</a>
@@ -166,10 +166,6 @@
             <div class="mb-3">
                 <label for="payment_date" class="form-label">Payment Date</label>
                 <input type="date" class="form-control" id="payment_date" name="payment_date" required>
-            </div>
-            <div class="mb-3">
-                <label for="payment_year" class="form-label">Payment of Year</label>
-                <input type="number" class="form-control" id="payment_year" name="payment_year" min="2000" max="2100" step="1" required>
             </div>
             <div class="mb-3">
                 <label for="payment_months" class="form-label">Payment of Months</label>

@@ -6,15 +6,26 @@ from datetime import datetime
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
-        fields = ['name', 'phone_number', 'board', 'student_class', 'subject', 'addmission_date', 'fees']
+        fields ="__all__"
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter phone number'}),
+            'phone_number2': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter phone number'}),
             'board': forms.Select(attrs={'class': 'form-control'}),  
             'student_class': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
             'subject': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject'}),
             'addmission_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'fees': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter fees'}),            
+        }
+        labels = {
+            'name': 'Student Name',
+            'phone_number': 'Phone Number',
+            'phone_number2': 'Alternate Number (Optional)',
+            'board': 'Board',
+            'student_class': 'Class',
+            'subject': 'Subject',
+            'addmission_date': 'Admission Date',
+            'fees': 'Fees',
         }
 
 class BatchForm(forms.ModelForm):

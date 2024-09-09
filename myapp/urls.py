@@ -33,7 +33,12 @@ urlpatterns = [
 	path('update-payment/<int:id>/<int:std_id>/', views.edit_payment, name='update_payment'),
 
     path('add-parent/<int:std_id>/',views.add_parent, name="add_parent"),
-    path('edit-parent/<int:id>/<int:std_id>/',views.edit_parent, name="edit_parent")
+    path('edit-parent/<int:id>/<int:std_id>/',views.edit_parent, name="edit_parent"),
+	
+
+
+    path('accounts/login/', views.user_login, name='login'),    
+    path('accounts/logout/', views.user_logout, name='logout'),
 ]
 
 

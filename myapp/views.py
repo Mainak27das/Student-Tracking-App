@@ -7,8 +7,42 @@ from django.db.models import Q
 from django.utils.dateparse import parse_date
 from django.db import models
 from decimal import Decimal
+from .forms import LoginForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Home Page with Student List and Search
+
+def user_login(request):
+    if request.user.is_authenticated:
+        messages.info(request, 'You are already logged in.')    
+        return redirect('index')
+    context = {}
+    if request.method == 'POST':
+        form = LoginForm(data = request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                messages.success(request, 'Login successful!')
+                return redirect('index')
+            else:
+                messages.error(request, 'Invalid username or password.')
+        else:
+            messages.error(request, 'Invalid form submission.')
+    context['form'] = LoginForm()
+    return render(request, 'login.html', context)
+
+def user_logout(request):
+    logout(request)
+    messages.success(request, 'You have been logged out.')
+    return redirect('login')
+
+@login_required(login_url='login')
 def index(request):
     search_query = request.GET.get("search", "")
     students = Student.objects.all()
@@ -37,6 +71,7 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+@login_required(login_url='login')
 def filter_students(request):
     print(request.GET)
     if request.GET.get("Board") or request.GET.get("Class") or request.GET.get("Subject"):
@@ -80,6 +115,7 @@ def filter_students(request):
     return render(request, 'index.html', context)
         
 # Student Profile Page
+@login_required(login_url='login')
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     batches = Batch.objects.filter(students=student)
@@ -99,6 +135,7 @@ def student_profile(request, student_id):
     return render(request, 'student_profile.html', context)
 
 # Create a New Batch
+@login_required(login_url='login')
 def create_batch(request):
     if request.method == "POST":
         form = BatchForm(request.POST)
@@ -117,6 +154,7 @@ def create_batch(request):
     # return render(request, 'wrong.html', {'form': form})
 
 # View All Batches
+@login_required(login_url='login')
 def view_batches(request):
     search_query = request.GET.get('search', '')
 
@@ -132,7 +170,7 @@ def view_batches(request):
     return render(request, 'view_batches.html', {'batches': batches})
 
 # Batch Detail View
-class BatchDetailView(DetailView):
+class BatchDetailView(LoginRequiredMixin, DetailView):
     model = Batch
     template_name = 'batch_detail.html'
     context_object_name = 'batch'
@@ -174,6 +212,7 @@ class BatchDetailView(DetailView):
         return context
 
 # Add Existing Students to a Batch
+@login_required(login_url='login')
 def add_existing_students(request, pk):
     batch = get_object_or_404(Batch, pk=pk)
     if request.method == 'POST':
@@ -191,6 +230,7 @@ def add_existing_students(request, pk):
     return redirect('batch_detail', pk=pk)
 
 # Add a New Student to a Batch
+@login_required(login_url='login')
 def add_new_student(request, pk):
     batch = get_object_or_404(Batch, pk=pk)
     if request.method == 'POST':
@@ -211,6 +251,7 @@ def add_new_student(request, pk):
     # return render(request, 'add_new_student.html', {'form': form})
 
 # Edit Batch Details
+@login_required(login_url='login')
 def edit_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
     if request.method == "POST":
@@ -224,6 +265,7 @@ def edit_batch(request, id):
     return render(request, 'edit_batch.html', {'form': form})
 
 # Delete a Batch
+@login_required(login_url='login')
 def delete_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
     if request.method == "POST":
@@ -233,6 +275,7 @@ def delete_batch(request, id):
     return render(request, 'confirm_delete.html', {'batch': batch})
 
 # Remove a Student from a Batch
+@login_required(login_url='login')
 def remove_student_from_batch(request, batch_id, student_id):
     batch = get_object_or_404(Batch, id=batch_id)
     student = get_object_or_404(Student, id=student_id)
@@ -241,6 +284,7 @@ def remove_student_from_batch(request, batch_id, student_id):
     return redirect('batch_detail', pk=batch.id)
 
 # Edit Student Profile
+@login_required(login_url='login')
 def edit_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     if request.method == 'POST':
@@ -254,6 +298,7 @@ def edit_student(request, student_id):
     return render(request, 'edit_student.html', {'form': form, 'student': student})
 
 # Delete Student Profile
+@login_required(login_url='login')
 def delete_student(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     if request.method == 'POST':
@@ -263,6 +308,7 @@ def delete_student(request, student_id):
     return render(request, 'confirm_delete_student.html', {'student': student})
 
 # Add a Teacher/Instructor
+@login_required(login_url='login')
 def add_teacher(request):
     search_query = request.GET.get('search', '')  # Get the search query
 
@@ -290,6 +336,7 @@ def add_teacher(request):
 
 
 # Edit teacher view
+@login_required(login_url='login')
 def edit_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     if request.method == 'POST':
@@ -302,7 +349,9 @@ def edit_teacher(request, teacher_id):
         form = TeacherForm(instance=teacher)
     return render(request, 'edit_teacher.html', {'form': form})
 
+
 # Delete teacher view
+@login_required(login_url='login')
 def delete_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     if request.method == 'POST':
@@ -315,7 +364,7 @@ def delete_teacher(request, teacher_id):
 #     student = get_object_or_404(Student, id=student_id)
 #     payments = Payment.objects.filter(student=student)
 
-
+@login_required(login_url='login')
 def payment_record(request, student_id):
     if request.method == "POST":
         
@@ -344,6 +393,7 @@ def payment_record(request, student_id):
         messages.success(request, 'Payment recorded successfully!')
     return redirect("student_profile", student_id=student_id)
 
+@login_required(login_url='login')
 def all_payment(request):
     context = {}
     payments = Payment.objects.all().order_by('-date')
@@ -376,7 +426,7 @@ def all_payment(request):
     return render(request, 'all_payments.html', context)
 
 
-
+@login_required(login_url='login')
 def edit_payment(request, id, std_id):
     payment = get_object_or_404(Payment, id=id)
     if request.method == 'POST':
@@ -397,6 +447,7 @@ def edit_payment(request, id, std_id):
         form = PaymentForm(instance=payment)
     return render(request, 'edit_payment.html', {'form': form})
 
+@login_required(login_url='login')
 def add_parent(request, std_id):
     student = get_object_or_404(Student, id=std_id)
     context = {}
@@ -411,6 +462,7 @@ def add_parent(request, std_id):
     context['form'] = ParentForm()
     return render(request, 'add_parent.html', context)
 
+@login_required(login_url='login')
 def edit_parent(request, id, std_id):
     parent = get_object_or_404(Parent, id=id)
     student = get_object_or_404(Student, id=std_id)

@@ -2,9 +2,10 @@
 
 {% block body %}
 	<div class="container">
-		<form action="" method="post"> {% csrf_token %}
+		<form action="" method="post" class=""> {% csrf_token %}
 			{{form}}
-			<input type="submit" value="Login">
+			<input type="submit" value="Login" class="btn btn-success mt-3">
 		</form>
+		<a href="{% url "password_reset" %}" class="text-end d-grid">Forgot Password?</a>
 	</div>
 {% endblock body %}

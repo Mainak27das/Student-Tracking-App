@@ -4,7 +4,7 @@ from myapp import views
 from .views import create_batch, view_batches, BatchDetailView, add_existing_students, add_new_student,edit_teacher, delete_teacher
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('index/', views.index, name='index'),
     # path('edit/<int:student_id>/', views.edit_student, name='edit_student'),  # Uncomment if needed
     path('student/<int:student_id>/', views.student_profile, name='student_profile'),
 	path('filter-student/', views.filter_students, name='filter_student'),
@@ -45,6 +45,9 @@ urlpatterns = [
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+
+
+    path('',views.home, name="home"),
 
 ]
 

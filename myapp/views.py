@@ -479,3 +479,11 @@ def edit_parent(request, id, std_id):
         form = ParentForm(instance=parent) 
     context ['form']= form
     return render(request, 'add_parent.html', context)
+
+
+
+
+
+
+def home(request):
+    return render(request, "home.html")

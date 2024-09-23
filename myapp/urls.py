@@ -48,6 +48,7 @@ urlpatterns = [
 
 
     path('',views.home, name="home"),
+    path('class_details/',views.class_details, name="class_details"),
 
 ]
 

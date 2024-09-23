@@ -1,0 +1,1015 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style  %}
+    <link rel="stylesheet" href="{% static "css/class_details.css" %}">
+{% endblock style  %}
+
+{% block body  %}
+
+<div class="meterial-access" style="background: linear-gradient(200deg, transparent 40%, rgb(240, 240, 255) 60%);">
+    <!-- Banner Section -->
+    <section class="hero-section" style="background-image: url('{% static "images\\home\\courssesbanner.jpg" %}');">
+        <div class="hero-content container">
+            <h2 class="display-4 fade-in">Comprehensive Education for Classes 5-12</h2>
+            <p class="lead fade-in-delay">Expert Guidance in Core Subjects to Boost Your Academic Success</p>
+
+            <button class="btn btn-lg btn-outline-light fw-semibold rounded-pill shadow-sm mx-2"
+                data-bs-toggle="collapse" data-bs-target="#exploreIcons" aria-expanded="false"
+                aria-controls="exploreIcons">
+                <i class="bi bi-arrows-angle-contract"></i> Connect with Us
+            </button>
+
+            <!-- Icons that will collapse -->
+            <div id="exploreIcons" class="collapse mt-3">
+                <button class="btn btn-outline-light rounded-circle m-2 shadow-sm social-btn">
+                    <i class="bi bi-whatsapp"></i>
+                </button>
+                <button class="btn btn-outline-light rounded-circle m-2 shadow-sm social-btn">
+                    <i class="bi bi-facebook"></i>
+                </button>
+                <button class="btn btn-outline-light rounded-circle m-2 shadow-sm social-btn">
+                    <i class="bi bi-youtube"></i>
+                </button>
+                <button class="btn btn-outline-light rounded-circle m-2 shadow-sm social-btn">
+                    <i class="bi bi-instagram"></i>
+                </button>
+                <button class="btn btn-outline-light rounded-circle m-2 shadow-sm social-btn">
+                    <i class="bi bi-twitter-x"></i>
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- -------------- -->
+
+    <!-- Body  -->
+
+    <div class="container my-5">
+        <p class="text-center text-capitalize fs-2 fw-semibold font-style-heading underline-heading">Subjects We Teach</p>
+        <!-- Nav Tabs -->
+        <div class="d-flex justify-content-center">
+            <ul class="nav nav-tabs fw-semibold" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active border-2" id="class-5-tab" data-bs-toggle="tab" href="#class-5" role="tab"
+                        aria-controls="class-5" aria-selected="true">Class 5</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-6-tab" data-bs-toggle="tab" href="#class-6" role="tab"
+                        aria-controls="class-6" aria-selected="false">Class 6</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-7-tab" data-bs-toggle="tab" href="#class-7" role="tab"
+                        aria-controls="class-7" aria-selected="false">Class 7</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-8-tab" data-bs-toggle="tab" href="#class-8" role="tab"
+                        aria-controls="class-8" aria-selected="false">Class 8</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-9-tab" data-bs-toggle="tab" href="#class-9" role="tab"
+                        aria-controls="class-9" aria-selected="false">Class 9</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-10-tab" data-bs-toggle="tab" href="#class-10" role="tab"
+                        aria-controls="class-10" aria-selected="false">Class 10</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-11-tab" data-bs-toggle="tab" href="#class-11" role="tab"
+                        aria-controls="class-11" aria-selected="false">Class 11</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link border-2 " id="class-12-tab" data-bs-toggle="tab" href="#class-12" role="tab"
+                        aria-controls="class-12" aria-selected="false">Class 12</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade show active" id="class-5" role="tabpanel" aria-labelledby="class-5-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Science</h5>
+                                <p class="card-text">Introduction to physics, chemistry, biology, and environmental
+                                    science.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher3.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-4-1" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-4-1">Study Material</button>
+
+                                <div id="exploresub-buttons-4-1" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Grammar, reading comprehension, writing, and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-4-2" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-4-2">Study Material</button>
+
+                                <div id="exploresub-buttons-4-2" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts</h5>
+                                <p class="card-text">Introduction to various art forms, history, and techniques.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-4-3" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-4-3">Study Material</button>
+
+                                <div id="exploresub-buttons-4-3" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- class-6 -->
+
+            <div class="tab-pane fade" id="class-6" role="tabpanel" aria-labelledby="class-6-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Science</h5>
+                                <p class="card-text">Introduction to physics, chemistry, biology, and environmental
+                                    science.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-4" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-4">Study Material</button>
+
+                                <div id="exploresub-buttons-4" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Grammar, reading comprehension, writing, and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-5" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-5">Study Material</button>
+
+                                <div id="exploresub-buttons-5" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts</h5>
+                                <p class="card-text">Introduction to various art forms, history, and techniques.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-6" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-6">Study Material</button>
+
+                                <div id="exploresub-buttons-6" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--  Class 7 -->
+            <div class="tab-pane fade" id="class-7" role="tabpanel" aria-labelledby="class-7-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Science</h5>
+                                <p class="card-text">Introduction to physics, chemistry, biology, and environmental
+                                    science.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-7" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-7">Study Material</button>
+
+                                <div id="exploresub-buttons-7" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Grammar, reading comprehension, writing, and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-8" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-8">Study Material</button>
+
+                                <div id="exploresub-buttons-8" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts</h5>
+                                <p class="card-text">Introduction to various art forms, history, and techniques.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-9" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-9">Study Material</button>
+
+                                <div id="exploresub-buttons-9" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- class-8 -->
+            <div class="tab-pane fade" id="class-8" role="tabpanel" aria-labelledby="class-8-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Mathematics</h5>
+                                <p class="card-text">Advanced algebra, trigonometry, geometry, and statistics.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-10" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-10">Study Material</button>
+
+                                <div id="exploresub-buttons-10" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Physical Science</h5>
+                                <p class="card-text">Study of matter, energy, and the physical universe.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-11" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-11">Study Material</button>
+
+                                <div id="exploresub-buttons-11" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Life Science</h5>
+                                <p class="card-text">Study of living organisms and life processes.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-12" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-12">Study Material</button>
+
+                                <div id="exploresub-buttons-12" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts</h5>
+                                <p class="card-text">Exploration of artistic techniques and history.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-13" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-13">Study Material</button>
+
+                                <div id="exploresub-buttons-13" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Literary analysis, advanced writing, and comprehension.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-14" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-14">Study Material</button>
+
+                                <div id="exploresub-buttons-14" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- class-9 -->
+            <div class="tab-pane fade" id="class-9" role="tabpanel" aria-labelledby="class-9-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Mathematics</h5>
+                                <p class="card-text">Advanced algebra, trigonometry, geometry, and statistics.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-15" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-15">Study Material</button>
+
+                                <div id="exploresub-buttons-15" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Physical Science</h5>
+                                <p class="card-text">Study of matter, energy, and the physical universe.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-16" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-16">Study Material</button>
+
+                                <div id="exploresub-buttons-16" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Life Science</h5>
+                                <p class="card-text">Study of living organisms and life processes.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-17" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-17">Study Material</button>
+
+                                <div id="exploresub-buttons-17" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts</h5>
+                                <p class="card-text">Exploration of artistic techniques and history.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-18" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-18">Study Material</button>
+
+                                <div id="exploresub-buttons-18" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Literary analysis, advanced writing, and comprehension.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-19" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-19">Study Material</button>
+
+                                <div id="exploresub-buttons-19" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- class-10 -->
+            <div class="tab-pane fade" id="class-10" role="tabpanel" aria-labelledby="class-10-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Mathematics</h5>
+                                <p class="card-text">Advanced algebra, trigonometry, geometry, and statistics.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-20" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-20">Study Material</button>
+
+                                <div id="exploresub-buttons-20" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Physical Science</h5>
+                                <p class="card-text">Study of matter, energy, and the physical universe.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-21" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-21">Study Material</button>
+
+                                <div id="exploresub-buttons-21" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Life Science</h5>
+                                <p class="card-text">Study of living organisms and life processes.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-22" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-22">Study Material</button>
+
+                                <div id="exploresub-buttons-22" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts</h5>
+                                <p class="card-text">Exploration of artistic techniques and history.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-23" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-23">Study Material</button>
+
+                                <div id="exploresub-buttons-23" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Literary analysis, advanced writing, and comprehension.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-24" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-24">Study Material</button>
+
+                                <div id="exploresub-buttons-24" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- class-11 -->
+            <div class="tab-pane fade" id="class-11" role="tabpanel" aria-labelledby="class-11-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Mathematics</h5>
+                                <p class="card-text">Calculus, advanced algebra, and differential equations.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-25" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-25">Study Material</button>
+
+                                <div id="exploresub-buttons-25" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Physics</h5>
+                                <p class="card-text">Classical mechanics, electromagnetism, and modern physics.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-26" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-26">Study Material</button>
+
+                                <div id="exploresub-buttons-26" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Nutrition</h5>
+                                <p class="card-text">Study of diet, nutrition, and health.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-27" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-27">Study Material</button>
+
+                                <div id="exploresub-buttons-27" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Biology</h5>
+                                <p class="card-text">Cell Biology, genetics, and Human anatomy.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-28" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-28">Study Material</button>
+
+                                <div id="exploresub-buttons-28" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">Advanced study of English language and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-29" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-29">Study Material</button>
+
+                                <div id="exploresub-buttons-29" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Bengali</h5>
+                                <p class="card-text">Study of Bengali language and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-30" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-30">Study Material</button>
+
+                                <div id="exploresub-buttons-30" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- class-12 -->
+            <div class="tab-pane fade" id="class-12" role="tabpanel" aria-labelledby="class-12-tab">
+                <div class="row g-4 mt-3 mb-3">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Mathematics</h5>
+                                <p class="card-text">Calculus, advanced algebra, and differential equations.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-31" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-31">Study Material</button>
+
+                                <div id="exploresub-buttons-31" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Physics</h5>
+                                <p class="card-text">Classical mechanics, electromagnetism, and modern physics.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-32" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-32">Study Material</button>
+
+                                <div id="exploresub-buttons-32" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Nutrition</h5>
+                                <p class="card-text">Study of diet, nutrition, and health.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-33" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-33">Study Material</button>
+
+                                <div id="exploresub-buttons-33" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Biology</h5>
+                                <p class="card-text">Cell Biology,generics and Human anatomy.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-34" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-34">Study Material</button>
+
+                                <div id="exploresub-buttons-34" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">English</h5>
+                                <p class="card-text">dvanced study of English language and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-35" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-35">Study Material</button>
+
+                                <div id="exploresub-buttons-35" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                        <div class="card h-100 border-1 rounded-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Bengali</h5>
+                                <p class="card-text">Study of Bengali language and literature.</p>
+                                <div class="d-flex align-items-center">
+                                    <img src="{% static 'images/home/taecher2.jpeg' %}" class=" border-0 p-2 img-fluid rounded-circle"
+                                        style="max-width: 80px;" alt="...">
+                                    <p class="text-body-secondary ms-2 mb-0">By Mr Teacher.</p>
+                                </div>
+
+                                <button class="btn btn-primary" data-bs-toggle="collapse"
+                                    data-bs-target="#exploresub-buttons-36" aria-expanded="false"
+                                    aria-controls="exploresub-buttons-36">Study Material</button>
+
+                                <div id="exploresub-buttons-36" class="collapse mt-3">
+                                    <button type="button" class="btn btn-outline-success fw-medium">WBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">CBSE</button>
+                                    <button type="button" class="btn btn-outline-success fw-medium">ICSE</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+
+<script src="{% static 'js/class_details.js' %}"></script>
+{% endblock body  %}

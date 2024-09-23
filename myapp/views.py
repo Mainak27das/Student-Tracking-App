@@ -487,3 +487,5 @@ def edit_parent(request, id, std_id):
 
 def home(request):
     return render(request, "home.html")
+def class_details(request):
+    return render(request, "class_details.html")

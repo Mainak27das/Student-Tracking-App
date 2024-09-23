@@ -12,9 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from django.contrib.messages import constants as messages
-import environ
-env=environ.Env()
-environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -140,6 +138,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = env("EMAIL")
-EMAIL_HOST_PASSWORD = env("PASSWORD")
+EMAIL_HOST_USER = "thelearnerspointdummy@gmail.com"
+EMAIL_HOST_PASSWORD = "khrr vtfo btae wtag"
 DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'

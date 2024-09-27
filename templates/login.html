@@ -1,11 +1,26 @@
 {% extends "base.html" %}
 
 {% block body %}
-	<div class="container">
-		<form action="" method="post" class=""> {% csrf_token %}
-			{{form}}
-			<input type="submit" value="Login" class="btn btn-success mt-3">
-		</form>
-		<a href="{% url "password_reset" %}" class="text-end d-grid">Forgot Password?</a>
-	</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0 rounded-5">
+                <div class="card-header bg-primary text-white text-center rounded-top-5">
+                    <h4>Login</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form action="" method="post" class="form-group">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-block mt-3">Login</button>
+                        </div>
+                    </form>
+                    <a href="{% url 'password_reset' %}" class="text-end d-block mt-3">Forgot Password?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock body %}

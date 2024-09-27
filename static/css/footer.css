@@ -1,0 +1,68 @@
+/* footer ------------------- */
+
+/* Container for the gallery */
+.gallery-container {
+    width: 300px; 
+    overflow: hidden; 
+    position: relative;
+    height: auto; 
+    padding: 0; 
+    margin: 0 auto; 
+}
+
+/* The gallery itself */
+.gallery {
+    display: flex;
+    padding: 0 5%; 
+    animation: scrollGallery 20s linear infinite; 
+}
+
+/* Individual images */
+.gallery-image {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    margin-right: 0px; 
+    border-radius: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Smooth scroll animation */
+@keyframes scrollGallery {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-400%); 
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .gallery-image {
+        height: 150px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        height: 150px; 
+        padding: 0; 
+    }
+
+    .gallery {
+        padding: 0 3%; 
+    }
+
+    .gallery-image {
+        height: 120px; 
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-image {
+        height: 100px; 
+    }
+}
+
+/* -------------------- */

@@ -7,17 +7,18 @@
         display: none;
     }
 </style>
-<link rel="stylesheet" href="{% static 'css/calender.css' %}">
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock style %}
 
 {% block body %}
+<div style="background-color: whitesmoke;">
 <div class="container-fluid py-4">
     <h1 class="text-center mb-4">Student Management</h1>
 
     <div class="row g-4">
         <!-- Sidebar -->
         <div class="col-lg-3 col-md-4 col-sm-12">
-            <div class="card shadow-md border-0">
+            <div class="card shadow-md border-0 rounded-4">
                 <div class="card-body">
                     <div class="calendar">
                         <div class="calendar-header d-flex justify-content-between align-items-center">
@@ -56,7 +57,7 @@
             <!-- Statistics Section -->
             <div class="row mb-4">
                 <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-md text-center border-0">
+                    <div class="card shadow-md text-center border-0 rounded-4">
                         <div class="card-body">
                             <h5 class="card-title">Total Students</h5>
                             <p class="card-text display-6">{{ total_students }}</p>
@@ -64,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-md text-center border-0">
+                    <div class="card shadow-md text-center border-0 rounded-4">
                         <div class="card-body">
                             <h5 class="card-title">CBSE Students</h5>
                             <p class="card-text display-6">{{ cbse_students }}</p>
@@ -72,7 +73,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-md text-center border-0">
+                    <div class="card shadow-md text-center border-0 rounded-4">
                         <div class="card-body">
                             <h5 class="card-title">WBBSE Students</h5>
                             <p class="card-text display-6">{{ wbbse_students }}</p>
@@ -80,7 +81,7 @@
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-3">
-                    <div class="card shadow-md text-center border-0">
+                    <div class="card shadow-md text-center border-0 rounded-4">
                         <div class="card-body">
                             <h5 class="card-title">ICSE Students</h5>
                             <p class="card-text display-6">{{ icse_students }}</p>
@@ -89,7 +90,7 @@
                 </div>
             </div>
 
-            <div class="card shadow-md border-0 m-0 p-0">
+            <div class="card shadow-md border-0 m-0 p-0 rounded-4">
                 <div class="card-body">
                     <div class="d-flex justify-content-start gap-2">
                         <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createBatchModal">Create Batch</a>
@@ -105,7 +106,7 @@
     </div>
 
     <!-- Student Table Section -->
-    <div class="card shadow-md border-0 mt-4">
+    <div class="card shadow-md border-0 mt-4 rounded-4">
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h5 class="card-title">Student Data</h5>
@@ -211,7 +212,7 @@
     </div>
 </div>
 
-
+</div>
 
 
 {% block script %}

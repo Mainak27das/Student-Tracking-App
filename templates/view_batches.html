@@ -3,6 +3,8 @@
 {% block title %}View Batches{% endblock title %}
 
 {% block body %}
+{% include "message.html" %}
+<div style="background-color: whitesmoke;">
 <div class="container-fluid py-5">
     <h2 class="text-center mb-5">Existing Batches</h2>
     <div class="d-flex justify-content-between mb-3 flex-wrap">
@@ -87,6 +89,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 {% endblock body %}
 

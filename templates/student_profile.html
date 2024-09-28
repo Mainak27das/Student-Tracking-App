@@ -6,6 +6,8 @@
 {% endblock style %}
 
 {% block body %}
+{% include "message.html" %}
+<div style="background-color: whitesmoke;">
 <div class="container py-5">
     <div class="card border-0 shadow-sm">
         <div class="card-body p-4">
@@ -203,6 +205,7 @@
         <button class="btn btn-danger w-100 mt-2 dialog-close" id="close-dialog">Close</button>
     </div>
 </dialog>
+</div>
 {% endblock body %}
 
 {% block script %}

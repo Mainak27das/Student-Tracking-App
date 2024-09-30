@@ -79,12 +79,14 @@ class BatchForm(forms.ModelForm):
 class TeacherForm(forms.ModelForm):
     class Meta:
         model = Teacher
-        fields = ['name', 'phone_number', 'subject_teaches', 'qualification']
+        fields = ['name', 'phone_number', 'subject_teaches', 'qualification' , 'experience' ,'profile_image']
         widgets = {
+            'profile_image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter teacher name'}),
             'phone_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter phone number'}),
             'subject_teaches': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter subject taught'}),
             'qualification': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter qualification'}),
+            'experience': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter experience'}),
         }
 
 class PaymentForm(forms.ModelForm):

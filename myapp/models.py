@@ -51,10 +51,12 @@ class Payment(models.Model):
     
 
 class Teacher(models.Model):
+    profile_image=models.ImageField(null=True,blank=True,upload_to="teacher-img/")
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=15)
     subject_teaches = models.CharField(max_length=100)
     qualification = models.CharField(max_length=100)
+    experience = models.CharField(max_length=100,null=True)
 
     def __str__(self):
         return self.name

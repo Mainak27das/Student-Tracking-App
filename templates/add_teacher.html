@@ -8,7 +8,7 @@
 {% block body %}
 {% include "message.html" %}
 <div style="background-color: whitesmoke;">
-    <div class="container-fluid mt-4">
+    <div class="container-fluid py-4">
         <h1 class="mb-4 text-center">Teacher Management</h1>
 
         <!-- Button to trigger modal -->
@@ -58,6 +58,12 @@
                                         {{ form.qualification }}
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="id_experience" class="form-label fw-bold">Experience:</label>
+                                        {{ form.experience }}
+                                    </div>
+                                </div>
                             </div>
                             <div class="text-center mt-4">
                                 <button type="submit" class="btn btn-dark btn-lg">Add Teacher</button>
@@ -87,10 +93,12 @@
                 <thead class="table-dark">
                     <tr>
                         <th>Slno.</th>
+                        <th>Img</th>
                         <th>Name</th>
                         <th>Phone Number</th>
                         <th>Subject Teaches</th>
                         <th>Qualification</th>
+                        <th>Experience</th>
                         <th scope="col" class="edit-column d-none">Edit</th>
                         <th scope="col" class="delete-column d-none">Delete</th>
                     </tr>
@@ -99,10 +107,16 @@
                     {% for teacher in teachers %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ teacher.name }}</td>
+                        <td>{% if teacher.profile_image %}
+                            <img src="{{ teacher.profile_image.url }}" class="avatar img-fluid rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="Profile Picture">
+                        {% else %}
+                            <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar img-fluid rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="Default Profile Picture">
+                        {% endif %}</td>
+                        <td class="text-wrap">{{ teacher.name }}</td>
                         <td>{{ teacher.phone_number }}</td>
-                        <td>{{ teacher.subject_teaches }}</td>
-                        <td>{{ teacher.qualification }}</td>
+                        <td class="text-wrap">{{ teacher.subject_teaches }}</td>
+                        <td class="text-wrap">{{ teacher.qualification }}</td>
+                        <td class="text-wrap" >{{ teacher.experience }}</td>
                         <td class="edit-column d-none">
                             {% if teacher.id %}
                             <a href="{% url 'edit_teacher' teacher.id %}" class="btn btn-warning">

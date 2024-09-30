@@ -340,7 +340,8 @@ def add_teacher(request):
 def edit_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     if request.method == 'POST':
-        form = TeacherForm(request.POST, instance=teacher)
+        form = TeacherForm(request.POST or None, request.FILES or None, instance=teacher)
+        # form = TeacherForm(request.POST, instance=teacher)
         if form.is_valid():
             form.save()
             messages.success(request, 'Teacher table updated successfully!')

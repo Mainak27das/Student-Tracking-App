@@ -2,6 +2,8 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from myapp import views
 from .views import create_batch, view_batches, BatchDetailView, add_existing_students, add_new_student,edit_teacher, delete_teacher
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('index/', views.index, name='index'),
@@ -50,6 +52,6 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('class_details/',views.class_details, name="class_details"),
 
-]
+]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
 

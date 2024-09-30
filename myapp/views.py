@@ -11,6 +11,7 @@ from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import os
 
 
 # Home Page with Student List and Search
@@ -313,7 +314,9 @@ def add_teacher(request):
     search_query = request.GET.get('search', '')  # Get the search query
 
     if request.method == 'POST':
-        form = TeacherForm(request.POST)
+        form = TeacherForm(request.POST, request.FILES)
+        print("post ", request.POST)
+        print("file ", request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Teacher added successfully!')
@@ -343,6 +346,11 @@ def edit_teacher(request, teacher_id):
         form = TeacherForm(request.POST or None, request.FILES or None, instance=teacher)
         # form = TeacherForm(request.POST, instance=teacher)
         if form.is_valid():
+            if 'profile_image' in request.FILES:
+                # Delete the old image if a new one is uploaded
+                if teacher.profile_image:
+                    if os.path.isfile(teacher.profile_image.url):
+                        os.remove(teacher.profile_image.url)
             form.save()
             messages.success(request, 'Teacher table updated successfully!')
             return redirect('add_teacher')
@@ -356,6 +364,8 @@ def edit_teacher(request, teacher_id):
 def delete_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     if request.method == 'POST':
+        if teacher.profile_image:
+            teacher.profile_image.delete()
         teacher.delete()
         messages.success(request, 'Teacher table Deleted successfully!')
         return redirect('add_teacher')

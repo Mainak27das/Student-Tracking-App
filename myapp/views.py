@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student, Batch,Teacher, Payment, Parent
+from .models import Student, Batch,Teacher, Payment, Parent, Achievement
 from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm, ParentForm, AchievementForm
 from django.contrib import messages
 from django.views.generic import DetailView
@@ -11,6 +11,7 @@ from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+import os
 
 
 # Home Page with Student List and Search
@@ -313,7 +314,7 @@ def add_teacher(request):
     search_query = request.GET.get('search', '')  # Get the search query
 
     if request.method == 'POST':
-        form = TeacherForm(request.POST)
+        form = TeacherForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Teacher added successfully!')
@@ -343,6 +344,11 @@ def edit_teacher(request, teacher_id):
         form = TeacherForm(request.POST or None, request.FILES or None, instance=teacher)
         # form = TeacherForm(request.POST, instance=teacher)
         if form.is_valid():
+            if 'profile_image' in request.FILES:
+                # Delete the old image if a new one is uploaded
+                if teacher.profile_image:
+                    if os.path.isfile(teacher.profile_image.url):
+                        os.remove(teacher.profile_image.url)
             form.save()
             messages.success(request, 'Teacher table updated successfully!')
             return redirect('add_teacher')
@@ -356,6 +362,8 @@ def edit_teacher(request, teacher_id):
 def delete_teacher(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     if request.method == 'POST':
+        if teacher.profile_image:
+            teacher.profile_image.delete()
         teacher.delete()
         messages.success(request, 'Teacher table Deleted successfully!')
         return redirect('add_teacher')
@@ -487,6 +495,8 @@ def home(request):
     context = {
         'teachers': teachers  # 'teachers' is the key to access in the template
     }
+    context['achivements'] = Achievement.objects.all()
+    print(context['achivements'])
     return render(request, "home.html", context)
 
 def class_details(request):
@@ -494,13 +504,15 @@ def class_details(request):
 
 @login_required(login_url='login')
 def achivement(request):
+    context = {}
     if request.method == 'POST':
-        form = AchievementForm(request.POST)
+        form = AchievementForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('achivement') 
     else:
-        form = AchievementForm()
+        context['form'] = AchievementForm()
 
-    return render(request, 'achivement.html', {'form': form})
+    context['achievements'] = Achievement.objects.all()
+    return render(request, 'achivement.html', context)
 

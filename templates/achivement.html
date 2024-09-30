@@ -26,7 +26,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" id="achievementForm">
+                        <form method="POST" id="achievementForm" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="mb-3">
                                 <label for="id_student_name" class="form-label">Student Name</label>
@@ -43,6 +43,10 @@
                             <div class="mb-3">
                                 <label for="id_board_name" class="form-label">Board Name</label>
                                 {{ form.board_name }}
+                            </div>
+                            <div class="mb-3">
+                                <label for="id_image" class="form-label">Image</label>
+                                {{ form.image }}
                             </div>
                         </form>
                     </div>

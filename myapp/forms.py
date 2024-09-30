@@ -131,7 +131,7 @@ class LoginForm(AuthenticationForm):
 class AchievementForm(forms.ModelForm):
     class Meta:
         model = Achievement
-        fields = ['student_name', 'class_name', 'score', 'board_name']
+        fields = ['student_name', 'class_name', 'score', 'board_name', 'image']
 
         widgets = {
             'student_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),

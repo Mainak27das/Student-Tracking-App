@@ -240,49 +240,16 @@
     <marquee behavior="alternate" direction="left" scrollamount="7">
       <div class="d-flex align-items-center achievement-track p-3">
         <!-- Card Items -->
-        <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
-          <div class="card-body">
-            <img src="{% static 'images/home/teacher6.jpeg' %}" class="rounded-circle mb-3" alt="Rohit Sharma" width="120" height="120">
-            <h5 class="card-title text-primary">Rohit Sharma - Class 12</h5>
-            <p class="card-text">Achieved 95% in CBSE Board Exams.</p>
+        {% for achievement in achivements %}
+          <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
+            <div class="card-body">
+              <img src="{{achievement.image.url}}" class="rounded-circle mb-3" alt="Rohit Sharma" width="120" height="120">
+              <h5 class="card-title text-primary">{{achievement.student_name}} - Class {{achievement.class_name}}</h5>
+              <p class="card-text">Achieved {{achievement.score}}% in {{achievement.board_name}} Board Exams.</p>
+            </div>
           </div>
-        </div>
-        <!-- Repeat slides as necessary -->
-        <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
-          <div class="card-body">
-            <img src="{% static 'images/home/teacher6.jpeg' %}" class="rounded-circle mb-3" alt="Sneha Gupta" width="120" height="120">
-            <h5 class="card-title text-primary">Sneha Gupta - Class 10</h5>
-            <p class="card-text">Scored 98% in ICSE Board Exams.</p>
-          </div>
-        </div>
-        <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
-          <div class="card-body">
-            <img src="{% static 'images/home/teacher6.jpeg' %}" class="rounded-circle mb-3" alt="Sneha Gupta" width="120" height="120">
-            <h5 class="card-title text-primary">Sneha Gupta - Class 10</h5>
-            <p class="card-text">Scored 98% in ICSE Board Exams.</p>
-          </div>
-        </div>
-        <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
-          <div class="card-body">
-            <img src="{% static 'images/home/teacher6.jpeg' %}" class="rounded-circle mb-3" alt="Sneha Gupta" width="120" height="120">
-            <h5 class="card-title text-primary">Sneha Gupta - Class 10</h5>
-            <p class="card-text">Scored 98% in ICSE Board Exams.</p>
-          </div>
-        </div>
-        <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
-          <div class="card-body">
-            <img src="{% static 'images/home/teacher6.jpeg' %}" class="rounded-circle mb-3" alt="Sneha Gupta" width="120" height="120">
-            <h5 class="card-title text-primary">Sneha Gupta - Class 10</h5>
-            <p class="card-text">Scored 98% in ICSE Board Exams.</p>
-          </div>
-        </div>
-        <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
-          <div class="card-body">
-            <img src="{% static 'images/home/teacher6.jpeg' %}" class="rounded-circle mb-3" alt="Sneha Gupta" width="120" height="120">
-            <h5 class="card-title text-primary">Sneha Gupta - Class 10</h5>
-            <p class="card-text">Scored 98% in ICSE Board Exams.</p>
-          </div>
-        </div>
+        {% endfor %}
+
         <!-- More Cards... -->
       </div>
     </marquee>

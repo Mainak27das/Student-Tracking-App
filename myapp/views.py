@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Student, Batch,Teacher, Payment, Parent
+from .models import Student, Batch,Teacher, Payment, Parent, Achievement
 from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm, ParentForm, AchievementForm
 from django.contrib import messages
 from django.views.generic import DetailView
@@ -315,8 +315,6 @@ def add_teacher(request):
 
     if request.method == 'POST':
         form = TeacherForm(request.POST, request.FILES)
-        print("post ", request.POST)
-        print("file ", request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Teacher added successfully!')
@@ -497,6 +495,8 @@ def home(request):
     context = {
         'teachers': teachers  # 'teachers' is the key to access in the template
     }
+    context['achivements'] = Achievement.objects.all()
+    print(context['achivements'])
     return render(request, "home.html", context)
 
 def class_details(request):
@@ -504,13 +504,15 @@ def class_details(request):
 
 @login_required(login_url='login')
 def achivement(request):
+    context = {}
     if request.method == 'POST':
-        form = AchievementForm(request.POST)
+        form = AchievementForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('achivement') 
     else:
-        form = AchievementForm()
+        context['form'] = AchievementForm()
 
-    return render(request, 'achivement.html', {'form': form})
+    context['achievements'] = Achievement.objects.all()
+    return render(request, 'achivement.html', context)
 

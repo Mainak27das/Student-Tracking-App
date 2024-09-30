@@ -487,6 +487,11 @@ def edit_parent(request, id, std_id):
 
 
 def home(request):
-    return render(request, "home.html")
+    teachers = Teacher.objects.all()
+    context = {
+        'teachers': teachers  # 'teachers' is the key to access in the template
+    }
+    return render(request, "home.html", context)
+
 def class_details(request):
     return render(request, "class_details.html")

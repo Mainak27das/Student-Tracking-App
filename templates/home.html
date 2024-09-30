@@ -327,149 +327,85 @@
 
 
 <!-- Our Teachers Section -->
-<section id="about" class="py-5"
-  style="background: linear-gradient(150deg, transparent 40%, rgb(240, 240, 255) 60%);">
+<section id="about" class="py-5" style="background: linear-gradient(150deg, transparent 40%, rgb(240, 240, 255) 60%);">
   <div class="container">
-    <p class="fs-2 text-center text-uppercase fw-semibold lh-1 font-style-heading underline-heading">Meet Our Mentors
-    </p>
+    <p class="fs-2 text-center text-uppercase fw-semibold lh-1 font-style-heading underline-heading">Meet Our Mentors</p>
     <p class="fs-5 text-center text-dark pb-4 lh-sm font-style-heading">
       Committed to nurturing growth and fostering academic excellence.
     </p>
+    
     <div id="mentorCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
-        <!-- First Slide -->
-        <div class="carousel-item active">
+        {% for teacher in teachers %}
+        <!-- Carousel Items -->
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
           <div class="row g-4 align-items-center">
             <div class="col-lg-6 col-md-12">
               <div class="card border-0 shadow">
-                <img src="{% static 'images/home/teacher1.jpeg' %}" class="img-fluid rounded mentor-image" alt="Mentor Image">
+                {% if teacher.profile_image %}
+                  <img src="{{ teacher.profile_image.url }}" class="img-fluid rounded mentor-image" alt="Mentor Image">
+                {% else %}
+                  <img src="https://www.w3schools.com/howto/img_avatar.png" class="img-fluid rounded mentor-image" alt="Default Mentor Image">
+                {% endif %}
               </div>
             </div>
             <div class="col-lg-6 col-md-12">
-              <h2 class="fw-bold text-primary">Mr. Rupam Chatterjee</h2>
+              <h2 class="fw-bold text-primary">{{ teacher.name }}</h2>
               <p class="text-muted mb-4">
-                <strong>Educational Qualification:</strong> BCA + MCA <br>
-                <strong>Experience:</strong> Taught 50+ Students in the last 5 years.
+                <strong>Subject Teaches:</strong> {{ teacher.subject_teaches }} <br>
+                <strong>Educational Qualification:</strong> {{ teacher.qualification }} <br>
+                <strong>Experience:</strong> {{ teacher.experience }}
               </p>
-              <button type="button"
-                class="btn btn-secondary mt-3 px-4 py-2 text-uppercase fw-semibold rounded-pill bt-ts"
-                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <button type="button" class="btn btn-secondary mt-3 px-4 py-2 text-uppercase fw-semibold rounded-pill bt-ts"
+                data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ forloop.counter }}">
                 Learn More
               </button>
             </div>
           </div>
         </div>
-
-        <!-- Second Slide -->
-        <div class="carousel-item">
-          <div class="row g-4 align-items-center">
-            <div class="col-lg-6 col-md-12">
-              <div class="card border-0 shadow">
-                <img src="{% static 'images/home/taecher3.jpeg' %}" class="img-fluid rounded mentor-image" alt="Mentor Image">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <h2 class="fw-bold text-primary">Mr. Rupam Chatterjee</h2>
-              <p class="text-muted mb-4">
-                <strong>Educational Qualification:</strong> BCA + MCA <br>
-                <strong>Experience:</strong> Taught 50+ Students in the last 5 years.
-              </p>
-              <button type="button"
-                class="btn btn-secondary mt-3 px-4 py-2 text-uppercase fw-semibold rounded-pill bt-ts"
-                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Third Slide -->
-        <div class="carousel-item">
-          <div class="row g-4 align-items-center">
-            <div class="col-lg-6 col-md-12">
-              <div class="card border-0 shadow">
-                <img src="{% static 'images/home/taecher2.jpeg' %}" class="img-fluid rounded mentor-image" alt="Mentor Image">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <h2 class="fw-bold text-primary">Mr. Rupam Chatterjee</h2>
-              <p class="text-muted mb-4">
-                <strong>Educational Qualification:</strong> BCA + MCA <br>
-                <strong>Experience:</strong> Taught 50+ Students in the last 5 years.
-              </p>
-              <button type="button"
-                class="btn btn-secondary mt-3 px-4 py-2 text-uppercase fw-semibold rounded-pill bt-ts"
-                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Fourth Slide -->
-        <div class="carousel-item">
-          <div class="row g-4 align-items-center">
-            <div class="col-lg-6 col-md-12">
-              <div class="card border-0 shadow">
-                <img src="{% static 'images/home/taecher2.jpeg' %}" class="img-fluid rounded mentor-image" alt="Mentor Image">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <h2 class="fw-bold text-primary">Mr. Rupam Chatterjee</h2>
-              <p class="text-muted mb-4">
-                <strong>Educational Qualification:</strong> BCA + MCA <br>
-                <strong>Experience:</strong> Taught 50+ Students in the last 5 years.
-              </p>
-              <button type="button"
-                class="btn btn-secondary mt-3 px-4 py-2 text-uppercase fw-semibold rounded-pill bt-ts"
-                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Learn More
-              </button>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
-      
 
       <!-- Carousel Controls -->
-      <button class="carousel-control-prev custom-control" type="button" data-bs-target="#mentorCarousel"
-        data-bs-slide="prev">
+      <button class="carousel-control-prev custom-control" type="button" data-bs-target="#mentorCarousel" data-bs-slide="prev">
         <span class="bg-dark rounded p-2">
           <i class="bi bi-arrow-left" style="font-size: 1.5rem; color: white;"></i>
         </span>
         <span class="visually-hidden">Previous</span>
       </button>
 
-      <button class="carousel-control-next custom-control" type="button" data-bs-target="#mentorCarousel"
-        data-bs-slide="next">
+      <button class="carousel-control-next custom-control" type="button" data-bs-target="#mentorCarousel" data-bs-slide="next">
         <span class="bg-dark rounded p-2">
           <i class="bi bi-arrow-right" style="font-size: 1.5rem; color: white;"></i>
         </span>
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-  </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Content for the modal goes here.
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
+    <!-- Modal -->
+    {% for teacher in teachers %}
+    <div class="modal fade" id="staticBackdrop{{ forloop.counter }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel{{ forloop.counter }}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel{{ forloop.counter }}">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Content for the modal goes here.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Understood</button>
+          </div>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
 </section>
+
 
 <!-- Footer  -->
 {% include "footer.html" %}

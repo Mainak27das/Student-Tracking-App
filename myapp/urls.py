@@ -51,6 +51,7 @@ urlpatterns = [
 
     path('',views.home, name="home"),
     path('class_details/',views.class_details, name="class_details"),
+    path('achivement/',views.achivement, name="achivement"),
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 

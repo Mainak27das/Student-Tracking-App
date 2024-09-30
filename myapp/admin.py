@@ -1,5 +1,5 @@
 from django.contrib import admin
-from myapp.models import Student,Batch,Teacher, Payment, Parent
+from myapp.models import Student,Batch,Teacher, Payment, Parent ,Achievement
 from myapp.forms import BatchForm
 
 
@@ -45,3 +45,10 @@ class ParentAdmin(admin.ModelAdmin):
 	search_fields = ['father_name', 'mother_name', 'father_phone_number', 'mother_phone_number', 'child']
 	list_filter = ['father_name', 'mother_name', 'father_phone_number', 'mother_phone_number', 'child']
 	list_per_page = 10
+
+@admin.register(Achievement)
+class AchievementAdmin(admin.ModelAdmin):
+    list_display = ('student_name', 'class_name', 'score', 'board_name')
+    search_fields = ('student_name', 'class_name', 'board_name')
+    list_filter = ('class_name', 'board_name') 
+    ordering = ('student_name',) 

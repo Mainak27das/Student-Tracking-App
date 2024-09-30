@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Student, Batch,Teacher, Payment, Parent
-from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm, ParentForm
+from .forms import StudentForm, BatchForm,TeacherForm, PaymentForm, ParentForm, AchievementForm
 from django.contrib import messages
 from django.views.generic import DetailView
 from django.db.models import Q
@@ -482,10 +482,6 @@ def edit_parent(request, id, std_id):
     return render(request, 'add_parent.html', context)
 
 
-
-
-
-
 def home(request):
     teachers = Teacher.objects.all()
     context = {
@@ -495,3 +491,16 @@ def home(request):
 
 def class_details(request):
     return render(request, "class_details.html")
+
+@login_required(login_url='login')
+def achivement(request):
+    if request.method == 'POST':
+        form = AchievementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('achivement') 
+    else:
+        form = AchievementForm()
+
+    return render(request, 'achivement.html', {'form': form})
+

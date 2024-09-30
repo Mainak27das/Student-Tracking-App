@@ -1,5 +1,5 @@
 from django import forms
-from .models import Student,Batch,Teacher, Payment, Parent
+from .models import Student,Batch,Teacher, Payment, Parent , Achievement
 from datetime import datetime
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
@@ -126,3 +126,16 @@ class LoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ['username', 'password']
+
+
+class AchievementForm(forms.ModelForm):
+    class Meta:
+        model = Achievement
+        fields = ['student_name', 'class_name', 'score', 'board_name']
+
+        widgets = {
+            'student_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
+            'class_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
+            'score': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter score'}),
+            'board_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter board name'}),
+        }

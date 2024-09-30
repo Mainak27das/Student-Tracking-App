@@ -88,3 +88,11 @@ class Batch(models.Model):
         return self.batch_times.get(day, "Not scheduled")
 
 
+class Achievement(models.Model):
+    student_name = models.CharField(max_length=100)
+    class_name = models.CharField(max_length=50)
+    score = models.DecimalField(max_digits=5, decimal_places=2)
+    board_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.student_name

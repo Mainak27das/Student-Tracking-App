@@ -538,7 +538,7 @@ def edit_achievement(request, achievement_id):
                         os.remove(achievement.image.path)
             form.save()
             messages.success(request, 'Achievement updated successfully!')
-            return redirect('achievement')
+            return redirect('achivement')
     else:
         form = AchievementForm(instance=achievement)
 
@@ -557,4 +557,4 @@ def delete_achievement(request, achievement_id):
             achievement.image.delete()
         achievement.delete()
         messages.success(request, 'Achievement deleted successfully!')
-        return redirect('achievement')
+        return redirect('achivement')

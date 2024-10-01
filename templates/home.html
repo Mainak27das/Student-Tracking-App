@@ -243,9 +243,13 @@
         {% for achievement in achivements %}
           <div class="achievement-item card rounded-4 border-0 text-center mx-3" style="min-width: 280px;">
             <div class="card-body">
-              <img src="{{achievement.image.url}}" class="rounded-circle mb-3" alt="Rohit Sharma" width="120" height="120">
-              <h5 class="card-title text-primary">{{achievement.student_name}} - Class {{achievement.class_name}}</h5>
-              <p class="card-text">Achieved {{achievement.score}}% in {{achievement.board_name}} Board Exams.</p>
+              {% if achievement.image %}
+                    <img src="{{achievement.image.url}}" class="avatar img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;" alt="Profile Picture">
+                  {% else %}
+                    <img src="https://www.w3schools.com/howto/img_avatar.png" class="avatar img-fluid rounded-circle" style="width: 120px; height: 120px; object-fit: cover;" alt="Default Profile Picture">
+              {% endif %}
+              <h5 class="card-title text-primary pt-2">{{achievement.student_name}} - Class {{achievement.class_name}}</h5>
+              <p class="card-text">Achieved <span class="text-success fw-bold"> {{achievement.score}}%</span> in <span class="text-success fw-bold">{{achievement.board_name}}</span> Board Exams.</p>
             </div>
           </div>
         {% endfor %}

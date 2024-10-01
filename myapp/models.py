@@ -93,7 +93,7 @@ class Achievement(models.Model):
     class_name = models.CharField(max_length=50)
     score = models.DecimalField(max_digits=5, decimal_places=2)
     board_name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='achievement-img/', null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to='achievement-img/')
 
     def __str__(self):
         return self.student_name

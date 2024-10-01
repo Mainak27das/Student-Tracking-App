@@ -506,13 +506,55 @@ def class_details(request):
 def achivement(request):
     context = {}
     if request.method == 'POST':
-        form = AchievementForm(request.POST, request.FILES)
+        form = AchievementForm(request.POST, request.FILES) 
         if form.is_valid():
             form.save()
-            return redirect('achivement') 
+            messages.success(request, 'Achievement Added successfully!')
+            return redirect('achivement')
     else:
-        context['form'] = AchievementForm()
+        form = AchievementForm()
 
-    context['achievements'] = Achievement.objects.all()
+    achievements = Achievement.objects.all()
+    
+    context['form'] = form
+    context['achievements'] = achievements
+    
     return render(request, 'achivement.html', context)
 
+
+# Edit Achivement view
+@login_required(login_url='login')
+def edit_achievement(request, achievement_id):
+    achievement = get_object_or_404(Achievement, id=achievement_id)
+    
+    if request.method == 'POST':
+        form = AchievementForm(request.POST, request.FILES, instance=achievement)
+        if form.is_valid():
+          
+            if 'image' in request.FILES:
+           
+                if achievement.image and achievement.image.path:
+                    if os.path.isfile(achievement.image.path):
+                        os.remove(achievement.image.path)
+            form.save()
+            messages.success(request, 'Achievement updated successfully!')
+            return redirect('achievement')
+    else:
+        form = AchievementForm(instance=achievement)
+
+    return render(request, 'edit_achievement.html', {'form': form})
+
+
+
+# Delete Achivement view
+@login_required(login_url='login')
+def delete_achievement(request, achievement_id):
+    achievement = get_object_or_404(Achievement, id=achievement_id)
+
+    if request.method == 'POST':
+     
+        if achievement.image and achievement.image.path:
+            achievement.image.delete()
+        achievement.delete()
+        messages.success(request, 'Achievement deleted successfully!')
+        return redirect('achievement')

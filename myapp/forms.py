@@ -134,6 +134,7 @@ class AchievementForm(forms.ModelForm):
         fields = ['student_name', 'class_name', 'score', 'board_name', 'image']
 
         widgets = {
+            'image': forms.ClearableFileInput(attrs={'class': 'form-control'}),
             'student_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter student name'}),
             'class_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter class'}),
             'score': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter score'}),

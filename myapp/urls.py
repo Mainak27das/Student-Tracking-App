@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from myapp import views
-from .views import create_batch, view_batches, BatchDetailView, add_existing_students, add_new_student,edit_teacher, delete_teacher,edit_achievement,delete_achievement
+from .views import create_batch, view_batches, BatchDetailView, add_existing_students, add_new_student,edit_teacher, delete_teacher
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -52,9 +52,9 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('class_details/',views.class_details, name="class_details"),
     
-    path('achivement/',views.achivement, name="achivement"),
-    path('edit_achievement/<int:achievement_id>/', edit_achievement, name='edit_achievement'),
-    path('delete_achievement/<int:achievement_id>/', delete_achievement, name='delete_achievement'),
+    path('achievement/', views.achievement, name='achievement'),
+    path('edit_achievement/<int:achievement_id>/', views.edit_achievement, name='edit_achievement'),
+    path('delete_achievement/<int:achievement_id>/', views.delete_achievement, name='delete_achievement'),
 
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 

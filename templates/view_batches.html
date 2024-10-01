@@ -9,8 +9,12 @@
     <h2 class="text-center mb-5">Existing Batches</h2>
     <div class="d-flex justify-content-between mb-3 flex-wrap">
         <div class="mb-2 mb-md-0">
-            <button type="button" class="btn btn-warning me-2" id="toggleEdit">Edit</button>
-            <button type="button" class="btn btn-danger" id="toggleDelete">Delete</button>
+            <button class="btn btn-warning me-2" type="button" data-bs-toggle="collapse" data-bs-target=".edit-column" aria-expanded="false" aria-controls="edit-column">
+                Edit
+            </button>
+            <button class="btn btn-danger" type="button" data-bs-toggle="collapse" data-bs-target=".delete-column" aria-expanded="false" aria-controls="delete-column">
+                Delete
+            </button>
         </div>
         <form class="form-inline d-flex" method="GET" action="{% url 'view_batches' %}" role="search">
             <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="{{ request.GET.search }}">
@@ -29,8 +33,8 @@
                     <th scope="col">Batch Day / Time</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">Teacher / Instructor</th>
-                    <th scope="col" class="edit-column d-none">Edit</th>
-                    <th scope="col" class="delete-column d-none">Delete</th>
+                    <th scope="col" class="edit-column collapse">Edit</th>
+                    <th scope="col" class="delete-column collapse">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,12 +66,12 @@
                             
                         </p>
                     </td>
-                    <td class="edit-column d-none">
+                    <td class="edit-column collapse">
                         <a href="{% url 'edit_batch' batch.id %}" class="btn btn-warning" aria-label="Edit batch">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
-                    <td class="delete-column d-none">
+                    <td class="delete-column collapse">
                         <form method="POST" action="{% url 'delete_batch' batch.id %}" onsubmit="return confirm('Are you sure you want to delete this batch?');">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger" aria-label="Delete batch">
@@ -89,5 +93,4 @@
 {% endblock body %}
 
 {% block script %}
-<script src="{% static "js/view_batches.js" %}"></script>
 {% endblock script %}

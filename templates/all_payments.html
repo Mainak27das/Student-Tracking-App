@@ -75,8 +75,7 @@ All Payments
                                 <td>{{ payment.student.student_class }}</td>
                                 <td>{{ payment.student.subject }}</td>
                                 <td>{{ payment.amount }}</td>
-                                <td class="{% if payment.due_amount > 0 %} text-danger {% endif %}">{{
-                                    payment.due_amount }}</td>
+                                <td class="{% if payment.due_amount > 0 %} text-danger {% endif %}">{{payment.due_amount }}</td>
                                 <td>{{ payment.payment_method }}</td>
                                 <td>{{ payment.date }}</td>
                                 <td>{{ payment.months }}</td>

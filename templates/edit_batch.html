@@ -34,3 +34,58 @@
     </div>
 </div>
 {% endblock %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const batchDayCheckboxes = document.querySelectorAll('#id_batch_day input[type="checkbox"]');
+        const timeFields = {
+            'MON': document.querySelector('[name="MON"]'),
+            'TUE': document.querySelector('[name="TUE"]'),
+            'WED': document.querySelector('[name="WED"]'),
+            'THU': document.querySelector('[name="THU"]'),
+            'FRI': document.querySelector('[name="FRI"]'),
+            'SAT': document.querySelector('[name="SAT"]'),
+            'SUN': document.querySelector('[name="SUN"]'),
+        };
+
+        // Function to convert 12-hour time format to 24-hour time format
+        function convertTo24HourFormat(time) {
+            const [timePart, modifier] = time.split(' ');
+            let [hours, minutes] = timePart.split(':');
+            if (hours === '12') {
+                hours = '00';
+            }
+            if (modifier === 'PM') {
+                hours = parseInt(hours, 10) + 12;
+            }
+            return `${hours.toString().padStart(2, '0')}:${minutes}`;
+        }
+
+        // Initialize time fields with batch times
+        const batchTimes = {{ batch.batch_times|safe }};
+        for (const [day, time] of Object.entries(batchTimes)) {
+            if (timeFields[day]) {
+                timeFields[day].value = convertTo24HourFormat(time);
+            }
+        }
+
+        function toggleTimeFields() {
+            batchDayCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    timeFields[checkbox.value].closest('tr').style.display = 'table-row';
+                } else {
+                    timeFields[checkbox.value].closest('tr').style.display = 'none';
+                }
+            });
+        }
+
+        batchDayCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', toggleTimeFields);
+        });
+
+        // Initial toggle to set the correct visibility on page load
+        toggleTimeFields();
+    });
+</script>
+{% endblock script %}

@@ -255,15 +255,17 @@ def add_new_student(request, pk):
 @login_required(login_url='login')
 def edit_batch(request, id):
     batch = get_object_or_404(Batch, id=id)
-    if request.method == "POST":
+    if request.method == 'POST':
         form = BatchForm(request.POST, instance=batch)
         if form.is_valid():
             form.save()
             messages.success(request, 'Batch updated successfully!')
             return redirect('view_batches')
+        else:
+            messages.error(request, 'Error updating batch. Please try again.')
     else:
         form = BatchForm(instance=batch)
-    return render(request, 'edit_batch.html', {'form': form})
+    return render(request, 'edit_batch.html', {'form': form, 'batch': batch})
 
 # Delete a Batch
 @login_required(login_url='login')
